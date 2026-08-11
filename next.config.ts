@@ -2,12 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-    ],
+    // Local /public assets only — avoids SSL issues with remote CDNs in some networks
+    remotePatterns: [],
   },
 };
 

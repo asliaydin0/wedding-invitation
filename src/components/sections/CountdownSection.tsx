@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { FloralAccent } from "@/components/decor/FloralAccent";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -39,26 +40,30 @@ export function CountdownSection() {
   const time = useCountdown(wedding.event.dateISO);
 
   return (
-    <Section id="countdown" className="text-center">
-      <Reveal variant="fadeUp">
-        <SectionHeading
-          eyebrow={wedding.copy.countdownEyebrow}
-          title={wedding.copy.countdownTitle}
-          subtitle={wedding.copy.countdownSubtitle}
-        />
-      </Reveal>
+    <Section id="countdown" className="relative overflow-hidden text-center">
+      <FloralAccent preset="countdown" />
 
-      <Reveal variant="blur">
-        <div className="mx-auto flex max-w-sm items-start justify-between gap-1 px-1 sm:gap-2">
-          <Digit value={time.days} label="GÜN" />
-          <span className="mt-2 font-serif text-2xl text-gold-400/50">:</span>
-          <Digit value={time.hours} label="SAAT" />
-          <span className="mt-2 font-serif text-2xl text-gold-400/50">:</span>
-          <Digit value={time.minutes} label="DAKİKA" />
-          <span className="mt-2 font-serif text-2xl text-gold-400/50">:</span>
-          <Digit value={time.seconds} label="SANİYE" />
-        </div>
-      </Reveal>
+      <div className="relative z-[1]">
+        <Reveal variant="fadeUp">
+          <SectionHeading
+            eyebrow={wedding.copy.countdownEyebrow}
+            title={wedding.copy.countdownTitle}
+            subtitle={wedding.copy.countdownSubtitle}
+          />
+        </Reveal>
+
+        <Reveal variant="blur">
+          <div className="mx-auto flex max-w-sm items-start justify-between gap-1 px-1 sm:gap-2">
+            <Digit value={time.days} label="GÜN" />
+            <span className="mt-2 font-serif text-2xl text-gold-400/50">:</span>
+            <Digit value={time.hours} label="SAAT" />
+            <span className="mt-2 font-serif text-2xl text-gold-400/50">:</span>
+            <Digit value={time.minutes} label="DAKİKA" />
+            <span className="mt-2 font-serif text-2xl text-gold-400/50">:</span>
+            <Digit value={time.seconds} label="SANİYE" />
+          </div>
+        </Reveal>
+      </div>
     </Section>
   );
 }

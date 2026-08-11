@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import Image from "next/image";
 import { useCallback, useEffect } from "react";
+import { InvitationImage } from "@/components/ui/InvitationImage";
 import { cn } from "@/lib/utils";
 
 type Item = {
@@ -106,11 +106,9 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative aspect-[3/4] w-full bg-espresso-900">
-              <Image
+              <InvitationImage
                 src={current.src}
                 alt={current.alt}
-                fill
-                className="object-cover"
                 sizes="(max-width: 512px) 100vw, 512px"
                 priority
               />

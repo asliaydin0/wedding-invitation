@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { Check, Heart } from "lucide-react";
-import { BotanicalSprig } from "@/components/decor/BotanicalSprig";
+import { FloralAccent } from "@/components/decor/FloralAccent";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { PaperCard } from "@/components/ui/PaperCard";
@@ -44,113 +44,113 @@ export function RsvpSection() {
   };
 
   return (
-    <Section id="rsvp">
-      <Reveal variant="fadeUp">
-        <SectionHeading
-          eyebrow={wedding.copy.rsvpEyebrow}
-          title={wedding.copy.rsvpTitle}
-          subtitle={wedding.copy.rsvpBody}
-        />
-      </Reveal>
+    <Section id="rsvp" className="relative overflow-hidden">
+      <FloralAccent preset="rsvp" />
 
-      <Reveal variant="scale" className="relative">
-        <BotanicalSprig className="absolute -left-4 -top-6 z-10 h-24 w-14 opacity-55" />
-        <BotanicalSprig
-          flip
-          className="absolute -bottom-4 -right-4 z-10 h-24 w-14 opacity-55"
-        />
+      <div className="relative z-[1]">
+        <Reveal variant="fadeUp">
+          <SectionHeading
+            eyebrow={wedding.copy.rsvpEyebrow}
+            title={wedding.copy.rsvpTitle}
+            subtitle={wedding.copy.rsvpBody}
+          />
+        </Reveal>
 
-        <PaperCard className="border border-gold-400/20">
-          {done ? (
-            <div className="flex flex-col items-center gap-4 py-6 text-center">
-              <span className="flex size-12 items-center justify-center rounded-full bg-burgundy-500/10 text-burgundy-500">
-                <Check size={22} strokeWidth={1.5} />
-              </span>
-              <Typography variant="heading" tone="ink">
-                {wedding.copy.rsvpSuccess}
-              </Typography>
-            </div>
-          ) : (
-            <form onSubmit={onSubmit} className="space-y-7">
-              <Input
-                name="name"
-                required
-                autoComplete="name"
-                label={wedding.copy.rsvpNameLabel}
-                placeholder={wedding.copy.rsvpNamePlaceholder}
-              />
-
-              <fieldset>
-                <legend className="text-label mb-3 text-ink-muted">
-                  {wedding.copy.rsvpStatusLabel}
-                </legend>
-                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                  {(
-                    [
-                      ["attending", wedding.copy.rsvpAttending],
-                      ["declining", wedding.copy.rsvpDeclining],
-                    ] as const
-                  ).map(([value, label]) => (
-                    <button
-                      key={value}
-                      type="button"
-                      onClick={() => setStatus(value)}
-                      className={cn(
-                        "flex items-center gap-2.5 rounded-md border px-3 py-3 text-left font-serif text-sm transition",
-                        status === value
-                          ? "border-burgundy-500/50 bg-burgundy-500/8 text-ink"
-                          : "border-brown-400/20 text-ink-soft hover:border-brown-400/40",
-                      )}
-                    >
-                      <Heart
-                        size={14}
-                        strokeWidth={1.5}
-                        className={
-                          status === value ? "fill-burgundy-500 text-burgundy-500" : ""
-                        }
-                      />
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </fieldset>
-
-              <label className="flex w-full flex-col gap-2 text-left">
-                <span className="text-label text-ink-muted">
-                  {wedding.copy.rsvpGuestsLabel}
+        <Reveal variant="scale" className="relative">
+          <PaperCard className="border border-gold-400/20">
+            {done ? (
+              <div className="flex flex-col items-center gap-4 py-6 text-center">
+                <span className="flex size-12 items-center justify-center rounded-full bg-burgundy-500/10 text-burgundy-500">
+                  <Check size={22} strokeWidth={1.5} />
                 </span>
-                <select
-                  name="guests"
-                  defaultValue={1}
-                  disabled={status === "declining"}
-                  className="w-full appearance-none border-0 border-b border-brown-400/35 bg-transparent py-2.5 font-serif text-base text-ink outline-none focus:border-burgundy-500 disabled:opacity-40"
+                <Typography variant="heading" tone="ink">
+                  {wedding.copy.rsvpSuccess}
+                </Typography>
+              </div>
+            ) : (
+              <form onSubmit={onSubmit} className="space-y-7">
+                <Input
+                  name="name"
+                  required
+                  autoComplete="name"
+                  label={wedding.copy.rsvpNameLabel}
+                  placeholder={wedding.copy.rsvpNamePlaceholder}
+                />
+
+                <fieldset>
+                  <legend className="text-label mb-3 text-ink-muted">
+                    {wedding.copy.rsvpStatusLabel}
+                  </legend>
+                  <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                    {(
+                      [
+                        ["attending", wedding.copy.rsvpAttending],
+                        ["declining", wedding.copy.rsvpDeclining],
+                      ] as const
+                    ).map(([value, label]) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setStatus(value)}
+                        className={cn(
+                          "flex items-center gap-2.5 rounded-md border px-3 py-3 text-left font-serif text-sm transition",
+                          status === value
+                            ? "border-burgundy-500/50 bg-burgundy-500/8 text-ink"
+                            : "border-brown-400/20 text-ink-soft hover:border-brown-400/40",
+                        )}
+                      >
+                        <Heart
+                          size={14}
+                          strokeWidth={1.5}
+                          className={
+                            status === value
+                              ? "fill-burgundy-500 text-burgundy-500"
+                              : ""
+                          }
+                        />
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
+
+                <label className="flex w-full flex-col gap-2 text-left">
+                  <span className="text-label text-ink-muted">
+                    {wedding.copy.rsvpGuestsLabel}
+                  </span>
+                  <select
+                    name="guests"
+                    defaultValue={1}
+                    disabled={status === "declining"}
+                    className="w-full appearance-none border-0 border-b border-brown-400/35 bg-transparent py-2.5 font-serif text-base text-ink outline-none focus:border-burgundy-500 disabled:opacity-40"
+                  >
+                    {[1, 2, 3, 4, 5, 6].map((n) => (
+                      <option key={n} value={n}>
+                        {n}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <Textarea
+                  name="message"
+                  label={wedding.copy.rsvpMessageLabel}
+                  placeholder={wedding.copy.rsvpMessagePlaceholder}
+                />
+
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-full"
+                  disabled={submitting}
                 >
-                  {[1, 2, 3, 4, 5, 6].map((n) => (
-                    <option key={n} value={n}>
-                      {n}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <Textarea
-                name="message"
-                label={wedding.copy.rsvpMessageLabel}
-                placeholder={wedding.copy.rsvpMessagePlaceholder}
-              />
-
-              <Button
-                type="submit"
-                variant="primary"
-                className="w-full"
-                disabled={submitting}
-              >
-                {submitting ? "…" : wedding.copy.rsvpSubmit}
-              </Button>
-            </form>
-          )}
-        </PaperCard>
-      </Reveal>
+                  {submitting ? "…" : wedding.copy.rsvpSubmit}
+                </Button>
+              </form>
+            )}
+          </PaperCard>
+        </Reveal>
+      </div>
     </Section>
   );
 }

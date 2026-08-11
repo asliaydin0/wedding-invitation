@@ -1,17 +1,20 @@
 "use client";
 
-import Image from "next/image";
-import { BotanicalSprig } from "@/components/decor/BotanicalSprig";
+import { FloralAccent } from "@/components/decor/FloralAccent";
+import { FloralMotif } from "@/components/decor/FloralMotif";
+import { VintageFrame } from "@/components/decor/VintageFrame";
+import { InvitationImage } from "@/components/ui/InvitationImage";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Typography } from "@/components/ui/Typography";
-import { VintageFrame } from "@/components/decor/VintageFrame";
 import { wedding } from "@/content/wedding";
 
 export function StorySection() {
   return (
-    <Section id="story" className="overflow-hidden">
+    <Section id="story" className="relative overflow-hidden">
+      <FloralAccent preset="story" />
+
       <Reveal variant="fade">
         <SectionHeading
           eyebrow={wedding.story.eyebrow}
@@ -19,24 +22,32 @@ export function StorySection() {
         />
       </Reveal>
 
-      <div className="grid gap-10 sm:gap-12">
+      <div className="relative z-[1] grid gap-10 sm:gap-12">
         <Reveal variant="scale" className="relative mx-auto w-full max-w-[16rem]">
           <VintageFrame>
             <div className="relative aspect-[3/4] overflow-hidden bg-beige-300/40">
-              <Image
-                src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=700&q=80"
-                alt={`${wedding.couple.partnerOne} & ${wedding.couple.partnerTwo}`}
-                fill
-                className="object-cover"
+              <InvitationImage
+                src={wedding.storyImage.src}
+                alt={wedding.storyImage.alt}
                 sizes="(max-width: 448px) 80vw, 256px"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-espresso-950/25 to-transparent" />
             </div>
           </VintageFrame>
-          <BotanicalSprig className="absolute -left-6 -top-4 h-28 w-16 -rotate-12 opacity-70" />
-          <BotanicalSprig
+          <FloralMotif
+            motif="sprig"
+            motion="sway"
+            appearDelay={0.15}
+            className="absolute -left-6 -top-4 h-28 w-16 -rotate-12 opacity-75"
+          />
+          <FloralMotif
+            motif="rose"
+            tone="burgundy"
             flip
-            className="absolute -bottom-4 -right-5 h-28 w-16 rotate-12 opacity-70"
+            motion="float"
+            appearDelay={0.25}
+            className="absolute -bottom-3 -right-4 h-16 w-14 opacity-80"
           />
         </Reveal>
 

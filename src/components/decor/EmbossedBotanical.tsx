@@ -1,5 +1,4 @@
-import { cn } from "@/lib/utils";
-import { BotanicalSprig } from "@/components/decor/BotanicalSprig";
+import { FloralMotif } from "@/components/decor/FloralMotif";
 
 type Props = {
   className?: string;
@@ -8,9 +7,12 @@ type Props = {
 /** Tone-on-tone embossed botanical for gatefold / parchment panels */
 export function EmbossedBotanical({ className }: Props) {
   return (
-    <BotanicalSprig
-      embossed
-      className={cn("h-40 w-28 opacity-90 sm:h-52 sm:w-36", className)}
+    <FloralMotif
+      motif="sprig"
+      tone="embossed"
+      appear={false}
+      motion="none"
+      className={className ?? "h-40 w-28 opacity-90 sm:h-52 sm:w-36"}
     />
   );
 }

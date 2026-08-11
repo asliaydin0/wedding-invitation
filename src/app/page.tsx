@@ -14,6 +14,7 @@ import { StorySection } from "@/components/sections/StorySection";
 import { VenueSection } from "@/components/sections/VenueSection";
 import { MusicToggle } from "@/components/ui/MusicToggle";
 import { useInvitation } from "@/hooks/useInvitation";
+import { wedding } from "@/content/wedding";
 
 function OpenedInvitation() {
   const { isOpen } = useInvitation();
@@ -21,7 +22,7 @@ function OpenedInvitation() {
   return (
     <Atmosphere className="min-h-dvh" withVignette={false} withGrain={false}>
       <InvitationShell>
-        {isOpen ? <MusicToggle /> : null}
+        {isOpen && wedding.audio.enabled ? <MusicToggle /> : null}
         <HeroSection />
         <StorySection />
         <DetailsSection />

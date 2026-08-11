@@ -1,6 +1,6 @@
 "use client";
 
-import { BotanicalCluster } from "@/components/decor/BotanicalCluster";
+import { FloralAccent } from "@/components/decor/FloralAccent";
 import { Divider } from "@/components/ui/Divider";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
@@ -10,18 +10,11 @@ import { wedding } from "@/content/wedding";
 export function FooterSection() {
   return (
     <footer id="finale" aria-label="Kapanış mesajı">
-      <Section className="overflow-hidden pb-28 pt-10 text-center">
-        <Reveal variant="fade">
-          <div className="relative px-2 py-12">
-            <BotanicalCluster
-              className="absolute -left-8 top-0 h-40 w-32 opacity-60"
-              tone="gold"
-            />
-            <BotanicalCluster
-              className="absolute -right-8 bottom-0 h-40 w-32 rotate-180 opacity-60"
-              tone="gold"
-            />
+      <Section className="relative overflow-hidden pb-28 pt-10 text-center">
+        <FloralAccent preset="finale" />
 
+        <Reveal variant="fade">
+          <div className="relative z-[1] px-2 py-12">
             <Typography variant="eyebrow" tone="gold" className="mb-6">
               {wedding.copy.footerEyebrow}
             </Typography>

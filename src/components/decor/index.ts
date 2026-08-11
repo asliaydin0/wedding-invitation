@@ -8,4 +8,7 @@ export { OrnamentalBorder } from "@/components/decor/OrnamentalBorder";
 export { VintageFrame } from "@/components/decor/VintageFrame";
 export { BotanicalSprig } from "@/components/decor/BotanicalSprig";
 export { FloralCorner } from "@/components/decor/FloralCorner";
+export { FloralMotif } from "@/components/decor/FloralMotif";
+export { FloralAccent } from "@/components/decor/FloralAccent";
 export { EmbossedBotanical } from "@/components/decor/EmbossedBotanical";
+export * from "@/components/decor/botanicals";

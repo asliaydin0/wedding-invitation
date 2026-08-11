@@ -299,6 +299,19 @@
     border: 1px solid var(--border-subtle);
     box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--ivory-50) 70%, transparent);
   }
+
+  /* Botanical micro-motion — transform only, very slow */
+  .animate-floral-sway {
+    animation: floral-sway 10s ease-in-out infinite;
+  }
+
+  .animate-floral-float {
+    animation: floral-float 11s ease-in-out infinite;
+  }
+
+  .animate-floral-drift {
+    animation: floral-drift 14s ease-in-out infinite;
+  }
 }
 
 @keyframes seal-breathe {
@@ -308,5 +321,43 @@
   }
   50% {
     transform: scale(1.035);
+  }
+}
+
+@keyframes floral-sway {
+  0%,
+  100% {
+    transform: rotate(-1.2deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(1.4deg) translate3d(0, 2px, 0);
+  }
+}
+
+@keyframes floral-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes floral-drift {
+  0%,
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(0.8deg) translate3d(2px, -2px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-floral-sway,
+  .animate-floral-float,
+  .animate-floral-drift {
+    animation: none !important;
   }
 }

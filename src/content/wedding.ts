@@ -86,40 +86,46 @@ export const wedding = {
   },
 
   audio: {
-    enabled: true,
+    /** Set true and add file at public/audio/background.mp3 when ready */
+    enabled: false,
     src: "/audio/background.mp3",
     title: "Background Music",
+  },
+
+  storyImage: {
+    src: "/gallery/story.svg",
+    alt: "Leyla & Giray",
   },
 
   gallery: {
     images: [
       {
-        src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
+        src: "/gallery/01.svg",
         alt: "Nişan anı",
         span: "tall" as const,
       },
       {
-        src: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80",
+        src: "/gallery/02.svg",
         alt: "Çiçek detayı",
         span: "wide" as const,
       },
       {
-        src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80",
+        src: "/gallery/03.svg",
         alt: "El ele",
         span: "square" as const,
       },
       {
-        src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80",
+        src: "/gallery/04.svg",
         alt: "Davet masası",
         span: "square" as const,
       },
       {
-        src: "https://images.unsplash.com/photo-1606800052052-a08af7148863?w=800&q=80",
+        src: "/gallery/05.svg",
         alt: "Yüzükler",
         span: "tall" as const,
       },
       {
-        src: "https://images.unsplash.com/photo-1529636798458-92182e662485?w=800&q=80",
+        src: "/gallery/06.svg",
         alt: "Gülümseyen çift",
         span: "wide" as const,
       },

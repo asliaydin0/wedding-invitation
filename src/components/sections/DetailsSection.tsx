@@ -1,6 +1,7 @@
 "use client";
 
 import { CalendarDays, Clock3, MapPin } from "lucide-react";
+import { FloralAccent } from "@/components/decor/FloralAccent";
 import { PaperCard } from "@/components/ui/PaperCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
@@ -31,7 +32,9 @@ const cards = [
 
 export function DetailsSection() {
   return (
-    <Section id="details" className="pt-8">
+    <Section id="details" className="relative overflow-hidden pt-8">
+      <FloralAccent preset="details" />
+
       <Reveal variant="fadeUp">
         <SectionHeading
           eyebrow={wedding.copy.detailsEyebrow}

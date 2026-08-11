@@ -1,37 +1,65 @@
-import { cn } from "@/lib/utils";
-import { BotanicalSprig } from "@/components/decor/BotanicalSprig";
+"use client";
 
-type Position = "tl" | "tr" | "bl" | "br";
+import { FloralMotif, type FloralMotion } from "@/components/decor/FloralMotif";
+import type { BotanicalTone } from "@/components/decor/botanicals/svg";
+import { cn } from "@/lib/utils";
+
+export type FloralCornerPosition = "tl" | "tr" | "bl" | "br";
 
 type Props = {
-  position?: Position;
+  position?: FloralCornerPosition;
   className?: string;
+  tone?: BotanicalTone;
   embossed?: boolean;
+  motion?: FloralMotion;
+  parallax?: number;
+  appearDelay?: number;
+  /** denser corner bouquet vs simple sprig */
+  variant?: "bouquet" | "sprig" | "cluster";
 };
 
-const positionClass: Record<Position, string> = {
+const positionClass: Record<FloralCornerPosition, string> = {
   tl: "left-0 top-0 origin-top-left",
-  tr: "right-0 top-0 origin-top-right -scale-x-100",
-  bl: "bottom-0 left-0 origin-bottom-left rotate-180 -scale-x-100",
-  br: "bottom-0 right-0 origin-bottom-right rotate-180",
+  tr: "right-0 top-0 origin-top-right",
+  bl: "bottom-0 left-0 origin-bottom-left",
+  br: "bottom-0 right-0 origin-bottom-right",
 };
 
-/** Corner botanical placement helper */
+/** Flip / rotate so bouquet always grows inward from the corner */
+const orientClass: Record<FloralCornerPosition, string> = {
+  tl: "",
+  tr: "-scale-x-100",
+  bl: "rotate-180 -scale-x-100",
+  br: "rotate-180",
+};
+
 export function FloralCorner({
   position = "tl",
   className,
+  tone,
   embossed = false,
+  motion = "sway",
+  parallax = 0.35,
+  appearDelay = 0,
+  variant = "bouquet",
 }: Props) {
+  const resolvedTone: BotanicalTone = embossed ? "embossed" : (tone ?? "gold");
+  const motif =
+    variant === "sprig" ? "sprig" : variant === "cluster" ? "cluster" : "corner";
+
   return (
-    <div
-      aria-hidden
+    <FloralMotif
+      motif={motif}
+      tone={resolvedTone}
+      motion={motion}
+      parallax={parallax}
+      appearDelay={appearDelay}
       className={cn(
-        "pointer-events-none absolute z-[2] h-28 w-20 sm:h-36 sm:w-28",
+        "absolute z-[2] h-36 w-28 sm:h-48 sm:w-36",
         positionClass[position],
+        orientClass[position],
         className,
       )}
-    >
-      <BotanicalSprig embossed={embossed} className="h-full w-full" />
-    </div>
+    />
   );
 }

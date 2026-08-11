@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { BotanicalSprig } from "@/components/decor/BotanicalSprig";
+import { SvgCornerBouquet, SvgSprig } from "@/components/decor/botanicals/svg";
 import { useAudio } from "@/hooks/useAudio";
 import { useInvitation } from "@/hooks/useInvitation";
 import {
@@ -65,25 +65,25 @@ function GatePanel({
 
         {isLeft ? (
           <>
-            <BotanicalSprig
-              embossed
-              className="absolute bottom-8 left-2 h-44 w-28 opacity-90 sm:bottom-12 sm:left-4 sm:h-56 sm:w-36"
+            <SvgCornerBouquet
+              tone="embossed"
+              className="absolute bottom-4 left-0 h-52 w-40 opacity-90 sm:bottom-8 sm:left-2 sm:h-64 sm:w-48"
             />
-            <BotanicalSprig
-              embossed
+            <SvgSprig
+              tone="embossed"
               flip
               className="absolute right-2 top-10 h-28 w-16 rotate-[-12deg] opacity-50 sm:right-4"
             />
           </>
         ) : (
           <>
-            <BotanicalSprig
-              embossed
+            <SvgCornerBouquet
+              tone="embossed"
               flip
-              className="absolute right-2 top-8 h-44 w-28 opacity-90 sm:right-4 sm:top-12 sm:h-56 sm:w-36"
+              className="absolute right-0 top-4 h-52 w-40 opacity-90 sm:right-2 sm:top-8 sm:h-64 sm:w-48"
             />
-            <BotanicalSprig
-              embossed
+            <SvgSprig
+              tone="embossed"
               className="absolute bottom-10 left-2 h-28 w-16 rotate-12 opacity-50 sm:left-4"
             />
           </>
