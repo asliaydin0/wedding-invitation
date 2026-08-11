@@ -1,39 +1,47 @@
 "use client";
 
-import { CalendarDays, Clock3, MapPin } from "lucide-react";
+import { CalendarPlus, Clock3, MapPinned, Navigation } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Typography } from "@/components/ui/Typography";
 import {
+  GoldDivider,
   InvitationSection,
   VintageCard,
+  VintageLink,
 } from "@/components/stationery";
+import { buildGoogleCalendarUrl } from "@/lib/calendar";
 import { wedding } from "@/content/wedding";
 
-const cards = [
+const detailRows = [
   {
-    icon: CalendarDays,
-    label: "Tarih",
+    label: wedding.copy.detailsVenueLabel,
+    value: wedding.venue.name,
+  },
+  {
+    label: wedding.copy.detailsAddressLabel,
+    value: wedding.venue.addressDetail,
+  },
+  {
+    label: wedding.copy.detailsDateLabel,
     value: wedding.event.dateDisplay,
     hint: wedding.event.dayLabel,
-    rotate: "subtle-left" as const,
   },
   {
-    icon: Clock3,
-    label: "Saat",
+    label: wedding.copy.detailsTimeLabel,
     value: wedding.event.timeLabel,
-    hint: "Davet başlangıcı",
-    rotate: "subtle-right" as const,
-  },
-  {
-    icon: MapPin,
-    label: "Mekân",
-    value: wedding.venue.name,
-    hint: wedding.venue.address,
-    rotate: "none" as const,
   },
 ] as const;
 
 export function DetailsSection() {
+  const calendarUrl = buildGoogleCalendarUrl({
+    title: wedding.event.calendarTitle,
+    description: wedding.event.calendarDescription,
+    location: wedding.venue.addressDetail,
+    startISO: wedding.event.dateISO,
+    durationHours: wedding.event.durationHours,
+    timezone: wedding.event.timezone,
+  });
+
   return (
     <InvitationSection
       id="details"
@@ -42,41 +50,61 @@ export function DetailsSection() {
       title={wedding.copy.detailsTitle}
       compact
     >
-      <div className="flex flex-col gap-5">
-        {cards.map((card, i) => {
-          const Icon = card.icon;
-          return (
-            <Reveal key={card.label} variant="scale" delay={i * 0.08}>
-              <VintageCard rotate={card.rotate} padded="sm" tone="ivory">
-                <div className="flex items-start gap-4 text-left">
-                  <span className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-full border border-gold-500/30 text-burgundy-500">
-                    <Icon size={18} strokeWidth={1.4} />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <Typography variant="label" tone="muted" className="mb-1.5 block">
-                      {card.label}
-                    </Typography>
-                    <Typography
-                      variant="heading"
-                      tone="ink"
-                      className="text-xl leading-snug"
-                    >
-                      {card.value}
-                    </Typography>
-                    <Typography
-                      variant="bodySans"
-                      tone="muted"
-                      className="mt-1 text-sm"
-                    >
-                      {card.hint}
-                    </Typography>
-                  </div>
-                </div>
-              </VintageCard>
-            </Reveal>
-          );
-        })}
-      </div>
+      <Reveal variant="scale">
+        <VintageCard tone="ivory" rotate="subtle-left" padded="md">
+          <div className="space-y-5 text-left">
+            {detailRows.map((row, i) => (
+              <div key={row.label}>
+                {i > 0 ? <GoldDivider variant="line" className="mb-5" max="full" align="stretch" /> : null}
+                <Typography variant="label" tone="muted" className="mb-1.5 block">
+                  {row.label}
+                </Typography>
+                <Typography
+                  variant="heading"
+                  tone="ink"
+                  className="text-[1.15rem] leading-snug sm:text-xl"
+                >
+                  {row.value}
+                </Typography>
+                {"hint" in row && row.hint ? (
+                  <Typography variant="bodySans" tone="muted" className="mt-1 text-sm">
+                    {row.hint}
+                  </Typography>
+                ) : null}
+              </div>
+            ))}
+          </div>
+
+          <GoldDivider variant="ornament" className="my-7" max="lg" />
+
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <VintageLink
+              href={wedding.venue.mapsUrl}
+              variant="burgundy"
+              size="sm"
+              className="w-full sm:w-auto"
+            >
+              <Navigation size={15} strokeWidth={1.5} />
+              {wedding.copy.mapCta}
+            </VintageLink>
+
+            <VintageLink
+              href={calendarUrl}
+              variant="outline"
+              size="sm"
+              className="w-full border-brown-500/25 text-ink hover:border-gold-500/50 hover:text-burgundy-600 sm:w-auto"
+            >
+              <CalendarPlus size={15} strokeWidth={1.5} />
+              {wedding.copy.calendarCta}
+            </VintageLink>
+          </div>
+
+          <div className="mt-6 flex items-center justify-center gap-4 text-brown-500/45">
+            <MapPinned size={14} strokeWidth={1.4} />
+            <Clock3 size={14} strokeWidth={1.4} />
+          </div>
+        </VintageCard>
+      </Reveal>
     </InvitationSection>
   );
 }

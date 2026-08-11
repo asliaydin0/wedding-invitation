@@ -5,8 +5,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Typography } from "@/components/ui/Typography";
 import {
   InvitationSection,
-  VintageButton,
   VintageCard,
+  VintageLink,
 } from "@/components/stationery";
 import { wedding } from "@/content/wedding";
 
@@ -19,7 +19,12 @@ export function VenueSection() {
       title={wedding.copy.venueTitle}
     >
       <Reveal variant="scale">
-        <VintageCard rotate="subtle-right" padded="sm" tone="cream" className="mb-8">
+        <VintageCard
+          rotate="subtle-right"
+          padded="sm"
+          tone="cream"
+          className="mb-8"
+        >
           <div className="relative grid grid-cols-2 gap-2">
             {[0, 1, 2, 3].map((i) => (
               <div
@@ -71,16 +76,14 @@ export function VenueSection() {
           {wedding.venue.addressDetail}
         </Typography>
 
-        <VintageButton
+        <VintageLink
+          href={wedding.venue.mapsUrl}
           variant="burgundy"
           className="gap-2"
-          onClick={() =>
-            window.open(wedding.venue.mapsUrl, "_blank", "noopener,noreferrer")
-          }
         >
           {wedding.copy.mapCta}
           <ArrowUpRight size={16} strokeWidth={1.5} />
-        </VintageButton>
+        </VintageLink>
       </Reveal>
     </InvitationSection>
   );

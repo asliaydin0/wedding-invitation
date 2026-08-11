@@ -20,18 +20,24 @@ export const wedding = {
   },
 
   event: {
-    dateISO: "2026-08-08T19:00:00+03:00",
-    dateLabel: "08 AĞUSTOS 2026",
-    dateDisplay: "08 Ağustos 2026",
+    dateISO: "2027-05-12T19:00:00+03:00",
+    dateLabel: "12 MAYIS 2027",
+    dateDisplay: "12 Mayıs 2027",
     timeLabel: "19:00",
-    dayLabel: "Cumartesi",
+    dayLabel: "Pazar",
     timezone: "Europe/Istanbul",
+    /** Calendar event length (hours) */
+    durationHours: 5,
+    calendarTitle: "Leyla & Giray Wedding",
+    calendarDescription:
+      "Leyla & Giray düğün töreni. Sizi aramızda görmekten mutluluk duyarız.",
   },
 
   venue: {
     name: "Örnek Düğün Mekanı",
     address: "İstanbul, Türkiye",
     addressDetail: "Beşiktaş, İstanbul, Türkiye",
+    /** Editable Google Maps directions link */
     mapsUrl: "https://maps.google.com/?q=Istanbul+Turkey",
     embedQuery: "Istanbul, Turkey",
   },
@@ -53,6 +59,12 @@ export const wedding = {
       "Bir ömürlük hikâyemizin en güzel sayfasını birlikte açıyoruz.",
     detailsTitle: "Düğün Detayları",
     detailsEyebrow: "WEDDING DETAILS",
+    detailsVenueLabel: "Venue Name",
+    detailsAddressLabel: "Address",
+    detailsDateLabel: "Date",
+    detailsTimeLabel: "Time",
+    mapCta: "Yol Tarifi Al",
+    calendarCta: "Takvime Ekle",
     dateTimeTitle: "Tarih & Saat",
     dateTimeEyebrow: "DATE & TIME",
     dateTimeNote: "Sizi bekliyor olacağız",
@@ -68,7 +80,6 @@ export const wedding = {
       minutes: "MINUTES",
       seconds: "SECONDS",
     },
-    mapCta: "YOL TARİFİ",
     galleryTitle: "En güzel anlarımız",
     galleryEyebrow: "GALLERY",
     gallerySubtitle: "Birlikte biriktirdiğimiz en özel duraklar",
