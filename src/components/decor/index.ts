@@ -1,0 +1,10 @@
+export { Atmosphere } from "@/components/decor/Atmosphere";
+export { GrainOverlay } from "@/components/decor/GrainOverlay";
+export { Vignette } from "@/components/decor/Vignette";
+export { PaperTexture } from "@/components/decor/PaperTexture";
+export { WaxSeal } from "@/components/decor/WaxSeal";
+export { OrnamentalBorder } from "@/components/decor/OrnamentalBorder";
+export { VintageFrame } from "@/components/decor/VintageFrame";
+export { BotanicalSprig } from "@/components/decor/BotanicalSprig";
+export { FloralCorner } from "@/components/decor/FloralCorner";
+export { EmbossedBotanical } from "@/components/decor/EmbossedBotanical";
