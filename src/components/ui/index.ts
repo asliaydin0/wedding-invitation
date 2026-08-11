@@ -1,3 +1,4 @@
+export { MusicControl, MusicToggle } from "@/components/ui/MusicControl";
 export { Typography } from "@/components/ui/Typography";
 export { Button } from "@/components/ui/Button";
 export { Divider } from "@/components/ui/Divider";
@@ -6,7 +7,7 @@ export { SectionHeading } from "@/components/ui/SectionHeading";
 export { PaperCard } from "@/components/ui/PaperCard";
 export { Input } from "@/components/ui/Input";
 export { Textarea } from "@/components/ui/Textarea";
-export { MusicToggle } from "@/components/ui/MusicToggle";
 export { ScrollIndicator } from "@/components/ui/ScrollIndicator";
 export { Reveal } from "@/components/ui/Reveal";
 export { Lightbox } from "@/components/ui/Lightbox";
+export { InvitationImage } from "@/components/ui/InvitationImage";

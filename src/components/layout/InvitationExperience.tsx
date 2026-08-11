@@ -2,9 +2,11 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { SealGate } from "@/components/sections/SealGate";
+import { MusicControl } from "@/components/ui/MusicControl";
 import { useInvitation } from "@/hooks/useInvitation";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { contentReveal } from "@/lib/motion";
+import { wedding } from "@/content/wedding";
 
 type Props = {
   children: React.ReactNode;
@@ -15,6 +17,7 @@ type Props = {
  * - locks scroll until invitation is open
  * - mounts SealGate while sealed/opening
  * - reveals main content with fade + scale
+ * - MusicControl sits at root (outside transforms) so fixed positioning works
  */
 export function InvitationExperience({ children }: Props) {
   const { phase, isOpen, isSealed, isOpening } = useInvitation();
@@ -28,6 +31,9 @@ export function InvitationExperience({ children }: Props) {
   return (
     <>
       <AnimatePresence>{!isOpen ? <SealGate key="seal-gate" /> : null}</AnimatePresence>
+
+      {/* Outside motion/transform ancestors — true viewport-fixed */}
+      {wedding.audio.enabled ? <MusicControl /> : null}
 
       <motion.div
         variants={

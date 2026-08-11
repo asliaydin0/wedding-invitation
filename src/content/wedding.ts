@@ -86,10 +86,12 @@ export const wedding = {
   },
 
   audio: {
-    /** Set true and add file at public/audio/background.mp3 when ready */
-    enabled: false,
-    src: "/audio/background.mp3",
-    title: "Background Music",
+    enabled: true,
+    /** Place file at public/audio/wedding.mp3 — missing file fails silently */
+    src: "/audio/wedding.mp3",
+    title: "Wedding Music",
+    /** Start on wax-seal tap unless user previously muted */
+    autoPlayOnOpen: true,
   },
 
   storyImage: {
