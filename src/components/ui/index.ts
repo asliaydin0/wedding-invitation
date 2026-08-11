@@ -5,3 +5,4 @@ export { Section } from "@/components/ui/Section";
 export { PaperCard } from "@/components/ui/PaperCard";
 export { Input } from "@/components/ui/Input";
 export { MusicToggle } from "@/components/ui/MusicToggle";
+export { ScrollIndicator } from "@/components/ui/ScrollIndicator";

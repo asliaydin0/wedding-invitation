@@ -39,7 +39,7 @@ export const wedding = {
     heroEyebrow: "DAVETLİSİNİZ",
     heroScript: "Let's celebrate",
     heroBody:
-      "BU ANLAMLI GÜNDE SİZLERİ ARAMIZDA GÖRMEKTEN MUTLULUK DUYARIZ",
+      "Bir ömürlük hikâyemizin en güzel sayfasını birlikte açıyoruz.",
     countdownTitle: "BULUŞMAYA KALAN",
     countdownSubtitle: "Bu özel ana kalan zamanı heyecanla sayıyoruz",
     mapCta: "YOL TARİFİ",

@@ -1,3 +1,4 @@
+export { BotanicalCluster } from "@/components/decor/BotanicalCluster";
 export { Atmosphere } from "@/components/decor/Atmosphere";
 export { GrainOverlay } from "@/components/decor/GrainOverlay";
 export { Vignette } from "@/components/decor/Vignette";

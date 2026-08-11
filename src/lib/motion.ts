@@ -176,3 +176,67 @@ export const gateOverlay: Variants = {
     pointerEvents: "none" as unknown as undefined,
   },
 };
+
+/** Hero — restrained stagger after invitation opens */
+export const heroRoot: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.22,
+      delayChildren: 0.12,
+    },
+  },
+};
+
+export const heroBackdrop: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 1.05, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const heroFloral: Variants = {
+  hidden: { opacity: 0, scale: 0.94 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+/** Names: soft rise + fade — elegant, not dramatic */
+export const heroName: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.05, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const heroAmpersand: Variants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.7, ease: [0.33, 1, 0.68, 1] },
+  },
+};
+
+export const heroMeta: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, ease: [0.33, 1, 0.68, 1] },
+  },
+};
+
+export const heroScrollHint: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.8, delay: 0.35, ease: [0.33, 1, 0.68, 1] },
+  },
+};
