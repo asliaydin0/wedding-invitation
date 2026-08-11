@@ -1,24 +1,111 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FloralAccent } from "@/components/decor/FloralAccent";
 import { Reveal } from "@/components/ui/Reveal";
 import { InvitationImage } from "@/components/ui/InvitationImage";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { galleryImages } from "@/content/gallery";
 import { wedding } from "@/content/wedding";
+import type { GalleryImage } from "@/types/invitation";
 import { cn } from "@/lib/utils";
 
-const spanClass = {
-  tall: "row-span-2 aspect-[3/4] sm:aspect-auto sm:min-h-[16rem]",
-  wide: "col-span-2 aspect-[2/1] sm:aspect-[2/1]",
-  square: "aspect-square",
-} as const;
+const masonryPlacement: Record<
+  NonNullable<GalleryImage["span"]>,
+  string
+> = {
+  tall: "row-span-2",
+  wide: "col-span-2",
+  square: "",
+};
+
+const aspectFallback: Record<NonNullable<GalleryImage["span"]>, string> = {
+  tall: "3 / 4",
+  wide: "2 / 1",
+  square: "1 / 1",
+};
+
+function GalleryFrame({
+  image,
+  index,
+  onOpen,
+}: {
+  image: GalleryImage;
+  index: number;
+  onOpen: (i: number) => void;
+}) {
+  const edge = image.edge ?? (index % 2 === 0 ? "soft" : "sharp");
+  const span = image.span ?? "square";
+  const aspect = image.aspect ?? aspectFallback[span];
+
+  return (
+    <Reveal
+      variant="scale"
+      delay={index * 0.06}
+      className={cn(masonryPlacement[span])}
+    >
+      <button
+        type="button"
+        onClick={() => onOpen(index)}
+        className={cn(
+          "group relative h-full min-h-[9.5rem] w-full overflow-hidden bg-beige-300/25 outline-none",
+          "shadow-soft transition duration-500 hover:shadow-lift",
+          "focus-visible:ring-2 focus-visible:ring-gold-400/55 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory-50",
+          edge === "soft" ? "rounded-[0.65rem]" : "rounded-none",
+        )}
+        style={{ aspectRatio: aspect }}
+        aria-label={`${image.alt} — büyüt`}
+      >
+        <span
+          className={cn(
+            "pointer-events-none absolute inset-0 z-[2]",
+            "border-[3px] border-ivory-50/90",
+            "shadow-[inset_0_0_0_1px_rgba(92,64,51,0.18)]",
+            edge === "soft" ? "rounded-[0.65rem]" : "rounded-none",
+          )}
+        />
+        <span
+          className={cn(
+            "pointer-events-none absolute inset-[7px] z-[2] border border-gold-500/25",
+            edge === "soft" ? "rounded-[0.35rem]" : "rounded-none",
+          )}
+        />
+        <span
+          className={cn(
+            "pointer-events-none absolute inset-[11px] z-[2] border border-espresso-950/10",
+            edge === "soft" ? "rounded-[0.2rem]" : "rounded-none",
+          )}
+        />
+
+        <InvitationImage
+          src={image.src}
+          alt={image.alt}
+          className={cn(
+            "transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+            "group-hover:scale-[1.035] group-active:scale-[1.02]",
+          )}
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 280px"
+        />
+
+        <span className="absolute inset-0 z-[1] bg-espresso-950/0 transition duration-500 group-hover:bg-espresso-950/18" />
+      </button>
+    </Reveal>
+  );
+}
 
 export function GallerySection() {
-  const images = wedding.gallery.images;
+  const images = useMemo(
+    () =>
+      galleryImages.filter(
+        (img) => typeof img.src === "string" && img.src.trim().length > 0,
+      ),
+    [],
+  );
   const [active, setActive] = useState<number | null>(null);
+
+  if (images.length === 0) return null;
 
   return (
     <Section id="gallery" className="relative overflow-hidden">
@@ -33,30 +120,21 @@ export function GallerySection() {
           />
         </Reveal>
 
-        <div className="grid auto-rows-[8.5rem] grid-cols-2 gap-2.5 sm:auto-rows-[10rem] sm:gap-3">
+        <div
+          className={cn(
+            "mt-3 grid auto-rows-[minmax(8.5rem,auto)] grid-cols-2 gap-3",
+            "sm:mt-5 sm:auto-rows-[minmax(10.5rem,auto)] sm:gap-4",
+            "md:grid-cols-3 md:gap-5",
+            "lg:gap-6",
+          )}
+        >
           {images.map((img, i) => (
-            <Reveal
-              key={img.src}
-              variant="scale"
-              delay={i * 0.05}
-              className={cn(spanClass[img.span ?? "square"])}
-            >
-              <button
-                type="button"
-                onClick={() => setActive(i)}
-                className="group relative h-full w-full overflow-hidden rounded-sm bg-beige-300/30 shadow-soft outline-none focus-visible:ring-2 focus-visible:ring-gold-400/60"
-                aria-label={`${img.alt} — büyüt`}
-              >
-                <InvitationImage
-                  src={img.src}
-                  alt={img.alt}
-                  className="transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] group-active:scale-[1.03]"
-                  sizes="(max-width: 448px) 45vw, 200px"
-                />
-                <span className="absolute inset-0 bg-espresso-950/0 transition group-hover:bg-espresso-950/20" />
-                <span className="pointer-events-none absolute inset-1.5 border border-ivory-50/0 transition group-hover:border-ivory-50/25" />
-              </button>
-            </Reveal>
+            <GalleryFrame
+              key={`${img.src}-${i}`}
+              image={img}
+              index={i}
+              onOpen={setActive}
+            />
           ))}
         </div>
       </div>

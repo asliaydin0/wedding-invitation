@@ -3,6 +3,10 @@
  * Edit this file to customize the entire invitation.
  */
 
+import { galleryImages } from "@/content/gallery";
+
+export { galleryImages };
+
 export const wedding = {
   meta: {
     title: "Leyla & Giray | Düğün Davetiyesi",
@@ -126,38 +130,7 @@ export const wedding = {
   },
 
   gallery: {
-    images: [
-      {
-        src: "/gallery/01.svg",
-        alt: "Nişan anı",
-        span: "tall" as const,
-      },
-      {
-        src: "/gallery/02.svg",
-        alt: "Çiçek detayı",
-        span: "wide" as const,
-      },
-      {
-        src: "/gallery/03.svg",
-        alt: "El ele",
-        span: "square" as const,
-      },
-      {
-        src: "/gallery/04.svg",
-        alt: "Davet masası",
-        span: "square" as const,
-      },
-      {
-        src: "/gallery/05.svg",
-        alt: "Yüzükler",
-        span: "tall" as const,
-      },
-      {
-        src: "/gallery/06.svg",
-        alt: "Gülümseyen çift",
-        span: "wide" as const,
-      },
-    ],
+    images: galleryImages,
     maxGuestUploads: 15,
   },
 

@@ -21,7 +21,12 @@ export type RsvpProvider = "mock" | "api" | "supabase" | "firebase";
 export type GalleryImage = {
   src: string;
   alt: string;
+  /** Masonry cell span */
   span?: "tall" | "wide" | "square";
+  /** Soft rounded vs sharp editorial crop */
+  edge?: "soft" | "sharp";
+  /** CSS aspect-ratio value, e.g. "3/4" */
+  aspect?: string;
 };
 
 /** sealed → opening → open */
