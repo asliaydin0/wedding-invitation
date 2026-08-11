@@ -1,3 +1,4 @@
+import { VintageCard } from "@/components/stationery/VintageCard";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
   elevated?: boolean;
 };
 
-/** Soft paper card surface — for RSVP, invite copy, forms */
+/** @deprecated Prefer VintageCard — thin wrapper for compatibility */
 export function PaperCard({
   children,
   className,
@@ -15,16 +16,13 @@ export function PaperCard({
   elevated = true,
 }: Props) {
   return (
-    <div
-      className={cn(
-        "relative overflow-hidden rounded-lg bg-paper text-ink",
-        elevated && "shadow-lift",
-        padded && "px-6 py-8 sm:px-8 sm:py-10",
-        className,
-      )}
+    <VintageCard
+      padded={padded}
+      elevated={elevated}
+      framed
+      className={cn(className)}
     >
-      <div aria-hidden className="texture-grain absolute inset-0" />
-      <div className="relative z-10">{children}</div>
-    </div>
+      {children}
+    </VintageCard>
   );
 }

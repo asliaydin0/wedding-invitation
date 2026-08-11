@@ -1,33 +1,30 @@
 "use client";
 
 import { ArrowUpRight, MapPin } from "lucide-react";
-import { FloralAccent } from "@/components/decor/FloralAccent";
-import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { Section } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Typography } from "@/components/ui/Typography";
+import {
+  InvitationSection,
+  VintageButton,
+  VintageCard,
+} from "@/components/stationery";
 import { wedding } from "@/content/wedding";
 
 export function VenueSection() {
   return (
-    <Section id="venue" className="relative overflow-hidden">
-      <FloralAccent preset="venue" />
-
-      <div className="relative z-[1]">
-        <Reveal variant="fadeUp">
-          <SectionHeading
-            eyebrow={wedding.copy.venueEyebrow}
-            title={wedding.copy.venueTitle}
-          />
-        </Reveal>
-
-        <Reveal variant="scale" className="relative">
-          <div className="relative mb-8 grid grid-cols-2 gap-2.5">
+    <InvitationSection
+      id="venue"
+      floral="venue"
+      eyebrow={wedding.copy.venueEyebrow}
+      title={wedding.copy.venueTitle}
+    >
+      <Reveal variant="scale">
+        <VintageCard rotate="subtle-right" padded="sm" tone="cream" className="mb-8">
+          <div className="relative grid grid-cols-2 gap-2">
             {[0, 1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="aspect-square rounded-md bg-beige-200/90 shadow-soft"
+                className="aspect-square rounded-[2px] bg-beige-200/90"
                 style={{
                   backgroundImage: `
                     linear-gradient(135deg, rgb(250 247 242 / 0.9), rgb(228 215 196 / 0.85)),
@@ -40,7 +37,7 @@ export function VenueSection() {
 
             <svg
               aria-hidden
-              className="pointer-events-none absolute inset-3 overflow-visible"
+              className="pointer-events-none absolute inset-2 overflow-visible"
               viewBox="0 0 200 200"
               fill="none"
             >
@@ -54,37 +51,37 @@ export function VenueSection() {
               />
             </svg>
 
-            <span className="absolute bottom-[18%] right-[18%] flex size-9 items-center justify-center rounded-full bg-burgundy-500 text-ivory-50 shadow-seal">
+            <span className="absolute bottom-[18%] right-[18%] flex size-9 items-center justify-center rounded-full bg-burgundy-500 text-ivory-50 shadow-[0_8px_20px_rgb(66_17_28/0.35)]">
               <MapPin size={16} strokeWidth={1.75} />
             </span>
           </div>
-        </Reveal>
+        </VintageCard>
+      </Reveal>
 
-        <Reveal variant="fadeUp" className="text-center">
-          <Typography
-            as="h3"
-            variant="heading"
-            tone="onDark"
-            className="mb-2 text-xl italic sm:text-2xl"
-          >
-            {wedding.venue.name}
-          </Typography>
-          <Typography variant="bodySans" tone="onDarkMuted" className="mb-8">
-            {wedding.venue.addressDetail}
-          </Typography>
+      <Reveal variant="fadeUp" className="text-center">
+        <Typography
+          as="h3"
+          variant="heading"
+          tone="onDark"
+          className="mb-2 text-xl italic sm:text-2xl"
+        >
+          {wedding.venue.name}
+        </Typography>
+        <Typography variant="bodySans" tone="onDarkMuted" className="mb-8">
+          {wedding.venue.addressDetail}
+        </Typography>
 
-          <Button
-            variant="primary"
-            className="gap-2"
-            onClick={() =>
-              window.open(wedding.venue.mapsUrl, "_blank", "noopener,noreferrer")
-            }
-          >
-            {wedding.copy.mapCta}
-            <ArrowUpRight size={16} strokeWidth={1.5} />
-          </Button>
-        </Reveal>
-      </div>
-    </Section>
+        <VintageButton
+          variant="burgundy"
+          className="gap-2"
+          onClick={() =>
+            window.open(wedding.venue.mapsUrl, "_blank", "noopener,noreferrer")
+          }
+        >
+          {wedding.copy.mapCta}
+          <ArrowUpRight size={16} strokeWidth={1.5} />
+        </VintageButton>
+      </Reveal>
+    </InvitationSection>
   );
 }

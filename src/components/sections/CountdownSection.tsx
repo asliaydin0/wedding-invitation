@@ -1,11 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { FloralAccent } from "@/components/decor/FloralAccent";
 import { Reveal } from "@/components/ui/Reveal";
-import { Section } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Typography } from "@/components/ui/Typography";
+import { GoldDivider, InvitationSection, VintageCard } from "@/components/stationery";
 import { useCountdown } from "@/hooks/useCountdown";
 import { wedding } from "@/content/wedding";
 
@@ -23,13 +21,13 @@ function Digit({ value, label }: { value: number; label: string }) {
             animate={{ opacity: 1, y: 0 }}
             exit={reduced ? undefined : { opacity: 0, y: -10 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="block font-serif text-[clamp(2.4rem,10vw,3.25rem)] font-medium leading-none text-burgundy-400"
+            className="block font-serif text-[clamp(2.4rem,10vw,3.25rem)] font-medium leading-none text-burgundy-500"
           >
             {display}
           </motion.span>
         </AnimatePresence>
       </div>
-      <Typography variant="caption" tone="onDarkMuted" className="text-[0.65rem]">
+      <Typography variant="caption" tone="muted" className="text-[0.65rem]">
         {label}
       </Typography>
     </div>
@@ -40,30 +38,29 @@ export function CountdownSection() {
   const time = useCountdown(wedding.event.dateISO);
 
   return (
-    <Section id="countdown" className="relative overflow-hidden text-center">
-      <FloralAccent preset="countdown" />
-
-      <div className="relative z-[1]">
-        <Reveal variant="fadeUp">
-          <SectionHeading
-            eyebrow={wedding.copy.countdownEyebrow}
-            title={wedding.copy.countdownTitle}
-            subtitle={wedding.copy.countdownSubtitle}
-          />
-        </Reveal>
-
-        <Reveal variant="blur">
-          <div className="mx-auto flex max-w-sm items-start justify-between gap-1 px-1 sm:gap-2">
+    <InvitationSection
+      id="countdown"
+      floral="countdown"
+      eyebrow={wedding.copy.countdownEyebrow}
+      title={wedding.copy.countdownTitle}
+      subtitle={wedding.copy.countdownSubtitle}
+      className="text-center"
+    >
+      <Reveal variant="blur">
+        <VintageCard tone="ivory" rotate="none" padded="md" className="mx-auto max-w-sm">
+          <GoldDivider variant="ornament" className="mb-6" max="lg" />
+          <div className="flex items-start justify-between gap-1 px-1 sm:gap-2">
             <Digit value={time.days} label="GÜN" />
-            <span className="mt-2 font-serif text-2xl text-gold-400/50">:</span>
+            <span className="mt-2 font-serif text-2xl text-gold-500/45">:</span>
             <Digit value={time.hours} label="SAAT" />
-            <span className="mt-2 font-serif text-2xl text-gold-400/50">:</span>
+            <span className="mt-2 font-serif text-2xl text-gold-500/45">:</span>
             <Digit value={time.minutes} label="DAKİKA" />
-            <span className="mt-2 font-serif text-2xl text-gold-400/50">:</span>
+            <span className="mt-2 font-serif text-2xl text-gold-500/45">:</span>
             <Digit value={time.seconds} label="SANİYE" />
           </div>
-        </Reveal>
-      </div>
-    </Section>
+          <GoldDivider variant="line" className="mt-6" max="sm" />
+        </VintageCard>
+      </Reveal>
+    </InvitationSection>
   );
 }
