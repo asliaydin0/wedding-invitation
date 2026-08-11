@@ -240,3 +240,50 @@ export const heroScrollHint: Variants = {
     transition: { duration: 0.8, delay: 0.35, ease: [0.33, 1, 0.68, 1] },
   },
 };
+
+/** Scroll-reveal presets — restrained editorial motion */
+export const revealFade: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const revealFadeUp: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const revealFadeScale: Variants = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const revealBlur: Variants = {
+  hidden: { opacity: 0, filter: "blur(6px)", y: 10 },
+  visible: {
+    opacity: 1,
+    filter: "blur(0px)",
+    y: 0,
+    transition: { duration: 0.95, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export const revealStagger: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.08,
+    },
+  },
+};

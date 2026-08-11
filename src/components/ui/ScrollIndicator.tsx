@@ -12,7 +12,7 @@ type Props = {
 
 /** Minimal scroll affordance — soft pulse, not bounce-heavy */
 export function ScrollIndicator({
-  href = "#countdown",
+  href = "#story",
   className,
   label = "Aşağı kaydır",
 }: Props) {

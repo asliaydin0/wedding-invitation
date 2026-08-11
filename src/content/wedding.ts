@@ -1,6 +1,6 @@
 /**
  * Single source of truth for invitation copy & media.
- * Edit this file to customize the entire invitation — no component hunting required.
+ * Edit this file to customize the entire invitation.
  */
 
 export const wedding = {
@@ -20,18 +20,29 @@ export const wedding = {
   },
 
   event: {
-    /** ISO datetime used by countdown & calendar links */
     dateISO: "2026-08-08T19:00:00+03:00",
     dateLabel: "08 AĞUSTOS 2026",
+    dateDisplay: "08 Ağustos 2026",
     timeLabel: "19:00",
+    dayLabel: "Cumartesi",
     timezone: "Europe/Istanbul",
   },
 
   venue: {
-    name: "Four Seasons Hotel Istanbul At The Bosphorus",
-    address: "No:28, Çırağan Cd., 34349 Beşiktaş / İstanbul, Türkiye",
-    mapsUrl: "https://maps.google.com/?q=Four+Seasons+Hotel+Istanbul+At+The+Bosphorus",
-    embedQuery: "Four Seasons Hotel Istanbul At The Bosphorus",
+    name: "Örnek Düğün Mekanı",
+    address: "İstanbul, Türkiye",
+    addressDetail: "Beşiktaş, İstanbul, Türkiye",
+    mapsUrl: "https://maps.google.com/?q=Istanbul+Turkey",
+    embedQuery: "Istanbul, Turkey",
+  },
+
+  story: {
+    title: "Hikâyemiz",
+    eyebrow: "OUR STORY",
+    paragraphs: [
+      "Bir kahvenin buharında başlayan sohbet, zamanla ortak bir rüyaya dönüştü. Küçük bakışlar, uzun yürüyüşler ve paylaşılan sessizlikler…",
+      "Bugün, o güzel başlangıcın en özel sayfasını birlikte çeviriyoruz. Sizleri bu mutluluğa tanıklık etmeye davet ediyoruz.",
+    ],
   },
 
   copy: {
@@ -40,40 +51,83 @@ export const wedding = {
     heroScript: "Let's celebrate",
     heroBody:
       "Bir ömürlük hikâyemizin en güzel sayfasını birlikte açıyoruz.",
-    countdownTitle: "BULUŞMAYA KALAN",
+    detailsTitle: "Düğün Detayları",
+    detailsEyebrow: "WEDDING DETAILS",
+    dateTimeTitle: "Tarih & Saat",
+    dateTimeEyebrow: "DATE & TIME",
+    dateTimeNote: "Sizi bekliyor olacağız",
+    venueTitle: "Mekân",
+    venueEyebrow: "VENUE",
+    countdownTitle: "Buluşmaya Kalan",
+    countdownEyebrow: "COUNTDOWN",
     countdownSubtitle: "Bu özel ana kalan zamanı heyecanla sayıyoruz",
     mapCta: "YOL TARİFİ",
     galleryTitle: "En güzel anlarımız",
+    galleryEyebrow: "GALLERY",
     gallerySubtitle: "Birlikte biriktirdiğimiz en özel duraklar",
     galleryCta: "ANI DAHA GÖRÜNTÜLE",
     rsvpTitle: "Katılım Bildirimi",
+    rsvpEyebrow: "RSVP",
     rsvpBody: "Varlığınız bu günü daha da özel kılacak.",
+    rsvpNameLabel: "Ad Soyad",
     rsvpNamePlaceholder: "İsminizi yazın...",
+    rsvpStatusLabel: "Katılım durumu",
     rsvpAttending: "Katılacağım",
     rsvpDeclining: "Katılamayacağım",
+    rsvpGuestsLabel: "Kişi sayısı",
+    rsvpMessageLabel: "Mesajınız",
+    rsvpMessagePlaceholder: "Birkaç satır bırakabilirsiniz…",
     rsvpSubmit: "GÖNDER",
+    rsvpSuccess: "Teşekkürler — yanıtınız bize ulaştı.",
+    footerEyebrow: "WITH LOVE",
     footerNote: "Sevgiyle bekliyoruz",
+    footerMessage:
+      "Hayatımızın bu en özel gününde yanımızda olmanız, bizim için en güzel hediye.",
   },
 
   audio: {
     enabled: true,
-    /** Place file under /public/audio/ */
     src: "/audio/background.mp3",
     title: "Background Music",
   },
 
   gallery: {
-    /** Paths under /public/gallery/ — replace with real photos */
     images: [
-      { src: "/gallery/01.jpg", alt: "Anı 1" },
-      { src: "/gallery/02.jpg", alt: "Anı 2" },
-      { src: "/gallery/03.jpg", alt: "Anı 3" },
+      {
+        src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
+        alt: "Nişan anı",
+        span: "tall" as const,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80",
+        alt: "Çiçek detayı",
+        span: "wide" as const,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80",
+        alt: "El ele",
+        span: "square" as const,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80",
+        alt: "Davet masası",
+        span: "square" as const,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1606800052052-a08af7148863?w=800&q=80",
+        alt: "Yüzükler",
+        span: "tall" as const,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1529636798458-92182e662485?w=800&q=80",
+        alt: "Gülümseyen çift",
+        span: "wide" as const,
+      },
     ],
     maxGuestUploads: 15,
   },
 
   rsvp: {
-    /** Hook up later: Formspree / API route / Google Sheet */
     endpoint: "/api/rsvp",
   },
 } as const;

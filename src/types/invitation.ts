@@ -3,12 +3,14 @@ export type RsvpStatus = "attending" | "declining";
 export type RsvpPayload = {
   name: string;
   status: RsvpStatus;
+  guests: number;
   message?: string;
 };
 
 export type GalleryImage = {
   src: string;
   alt: string;
+  span?: "tall" | "wide" | "square";
 };
 
 /** sealed → opening → open */
