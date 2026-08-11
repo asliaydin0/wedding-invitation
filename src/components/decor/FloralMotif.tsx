@@ -18,6 +18,7 @@ import {
   type BotanicalTone,
 } from "@/components/decor/botanicals/svg";
 import { useFineFloralMotion } from "@/hooks/useFineFloralMotion";
+import { duration, ease, scale } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 export type FloralMotifKind =
@@ -68,10 +69,15 @@ function ParallaxY({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [intensity * 28, -intensity * 28]);
+  const travel = intensity * 16;
+  const y = useTransform(scrollYProgress, [0, 1], [travel, -travel]);
 
   return (
-    <motion.div ref={ref} style={{ y }} className={className}>
+    <motion.div
+      ref={ref}
+      style={{ y }}
+      className={cn("will-change-transform", className)}
+    >
       {children}
     </motion.div>
   );
@@ -134,14 +140,17 @@ export function FloralMotif({
   return (
     <motion.div
       aria-hidden
-      className={cn("pointer-events-none", className)}
-      initial={{ opacity: 0, scale: 0.94, y: 10 }}
+      className={cn(
+        "pointer-events-none will-change-[opacity,transform]",
+        className,
+      )}
+      initial={{ opacity: 0, scale: scale.section, y: 8 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.12 }}
       transition={{
-        duration: 1.15,
+        duration: duration.section + 0.15,
         delay: appearDelay,
-        ease: [0.22, 1, 0.36, 1],
+        ease: ease.cinematic,
       }}
     >
       {withParallax}

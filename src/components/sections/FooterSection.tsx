@@ -13,7 +13,7 @@ export function FooterSection() {
       <Section className="relative overflow-hidden pb-28 pt-10 text-center">
         <FloralAccent preset="finale" />
 
-        <Reveal variant="fade">
+        <Reveal variant="fade" intensity="subtle">
           <div className="relative z-[1] px-2 py-12">
             <Typography variant="eyebrow" tone="gold" className="mb-6">
               {wedding.copy.footerEyebrow}
@@ -37,7 +37,7 @@ export function FooterSection() {
 
             <Divider className="mb-8" />
 
-            <Reveal variant="blur" delay={0.1}>
+            <Reveal variant="fadeUp" intensity="subtle" delay={0.1}>
               <Typography
                 variant="body"
                 tone="onDarkMuted"

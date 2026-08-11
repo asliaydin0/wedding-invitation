@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -10,12 +10,14 @@ type Props = {
   label?: string;
 };
 
-/** Minimal scroll affordance — soft pulse, not bounce-heavy */
+/** Minimal scroll affordance — soft drift, never bounce */
 export function ScrollIndicator({
   href = "#story",
   className,
   label = "Aşağı kaydır",
 }: Props) {
+  const reduced = useReducedMotion() ?? false;
+
   return (
     <a
       href={href}
@@ -30,12 +32,16 @@ export function ScrollIndicator({
       </span>
       <motion.span
         aria-hidden
-        animate={{ y: [0, 5, 0] }}
-        transition={{
-          duration: 2.2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={reduced ? undefined : { y: [0, 4, 0] }}
+        transition={
+          reduced
+            ? undefined
+            : {
+                duration: 2.8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }
+        }
         className="flex size-8 items-center justify-center rounded-full border border-ivory-100/20"
       >
         <ChevronDown size={14} strokeWidth={1.25} />

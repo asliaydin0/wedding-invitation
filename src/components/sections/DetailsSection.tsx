@@ -50,7 +50,7 @@ export function DetailsSection() {
       title={wedding.copy.detailsTitle}
       compact
     >
-      <Reveal variant="scale">
+      <Reveal variant="fadeUp" intensity="subtle">
         <VintageCard tone="ivory" rotate="subtle-left" padded="md">
           <div className="space-y-5 text-left">
             {detailRows.map((row, i) => (

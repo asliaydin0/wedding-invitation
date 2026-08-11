@@ -14,7 +14,7 @@ export function RsvpSection() {
       title={wedding.copy.rsvpTitle}
       subtitle={wedding.copy.rsvpBody}
     >
-      <Reveal variant="scale">
+      <Reveal variant="fadeUp" intensity="subtle">
         <VintageCard rotate="subtle-left" tone="ivory" padded="md">
           <RsvpForm />
         </VintageCard>

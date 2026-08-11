@@ -32,5 +32,6 @@ export type GalleryImage = {
 /** sealed → opening → open */
 export type InvitationPhase = "sealed" | "opening" | "open";
 
-export const INVITATION_OPEN_MS = 1800;
+/** Gatefold + seal + content settle — keep in sync with lib/motion opening tokens */
+export const INVITATION_OPEN_MS = 2400;
 export const INVITATION_OPEN_REDUCED_MS = 400;

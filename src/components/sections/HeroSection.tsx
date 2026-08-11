@@ -35,7 +35,7 @@ export function HeroSection() {
       className="relative flex min-h-dvh flex-col overflow-hidden"
     >
       <motion.div
-        className="absolute inset-0"
+        className="absolute inset-0 will-change-[opacity]"
         variants={reduced ? undefined : heroBackdrop}
         initial={reduced ? false : "hidden"}
         animate={show ? "visible" : "hidden"}
@@ -66,7 +66,7 @@ export function HeroSection() {
       </motion.div>
 
       <motion.div
-        className="relative z-10 flex min-h-dvh flex-1 flex-col"
+        className="relative z-10 flex min-h-dvh flex-1 flex-col will-change-[opacity,transform]"
         variants={reduced ? undefined : heroRoot}
         initial={reduced ? false : "hidden"}
         animate={show ? "visible" : "hidden"}

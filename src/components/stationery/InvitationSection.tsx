@@ -62,7 +62,9 @@ export function InvitationSection({
       <div className="relative z-[1]">
         {heading ? (
           revealHeading ? (
-            <Reveal variant="fadeUp">{heading}</Reveal>
+            <Reveal variant="fadeUp" intensity="subtle">
+              {heading}
+            </Reveal>
           ) : (
             heading
           )

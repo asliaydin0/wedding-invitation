@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect } from "react";
 import { InvitationImage } from "@/components/ui/InvitationImage";
 import { useSwipe } from "@/hooks/useSwipe";
+import { duration, ease } from "@/lib/motion";
 import type { GalleryImage } from "@/types/invitation";
 import { cn } from "@/lib/utils";
 
@@ -67,7 +68,7 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.28 }}
+          transition={{ duration: duration.micro + 0.05 }}
           onClick={onClose}
           role="dialog"
           aria-modal="true"
@@ -120,7 +121,7 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
             initial={{ opacity: 0, scale: 0.97, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: duration.sectionSoft, ease: ease.cinematic }}
             onClick={(e) => e.stopPropagation()}
             {...swipe}
           >

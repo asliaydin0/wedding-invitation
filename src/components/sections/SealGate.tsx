@@ -129,15 +129,15 @@ function SealButton({
         initial={{ opacity: 0.2, scale: 1 }}
         animate={
           phase === "opening"
-            ? { opacity: [0.2, 0.95, 0.3], scale: [1, 1.45, 1.7] }
+            ? { opacity: [0.22, 0.8, 0.25], scale: [1, 1.28, 1.5] }
             : reduced
               ? { opacity: 0.22, scale: 1 }
-              : { opacity: [0.18, 0.34, 0.18], scale: [1, 1.08, 1] }
+              : { opacity: [0.16, 0.28, 0.16], scale: [1, 1.04, 1] }
         }
         transition={
           phase === "opening"
-            ? { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
-            : { duration: 2.6, repeat: Infinity, ease: "easeInOut" }
+            ? { duration: 1.1, ease: [0.22, 1, 0.36, 1] }
+            : { duration: 3.2, repeat: Infinity, ease: "easeInOut" }
         }
       />
 
@@ -223,7 +223,10 @@ export const SealGate = forwardRef<HTMLDivElement>(function SealGate(_, ref) {
       className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-espresso-950"
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
+      exit={{
+        opacity: 0,
+        transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+      }}
     >
       <div
         aria-hidden
@@ -271,9 +274,9 @@ export const SealGate = forwardRef<HTMLDivElement>(function SealGate(_, ref) {
       {phase === "sealed" ? (
         <motion.p
           className="pointer-events-none absolute bottom-10 left-1/2 z-40 w-full max-w-xs -translate-x-1/2 px-6 text-center font-serif text-xs tracking-[0.22em] text-ivory-100/55 uppercase"
-          initial={{ opacity: 0, y: 8 }}
+          initial={reduced ? false : { opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.8 }}
+          transition={{ delay: 0.7, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
         >
           {wedding.copy.sealHint}
         </motion.p>

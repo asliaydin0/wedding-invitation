@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { FloralAccent } from "@/components/decor/FloralAccent";
-import { Reveal } from "@/components/ui/Reveal";
+import { Reveal, RevealItem, Stagger } from "@/components/ui/Reveal";
 import { InvitationImage } from "@/components/ui/InvitationImage";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { Section } from "@/components/ui/Section";
@@ -41,9 +41,9 @@ function GalleryFrame({
   const aspect = image.aspect ?? aspectFallback[span];
 
   return (
-    <Reveal
+    <RevealItem
       variant="scale"
-      delay={index * 0.06}
+      intensity="subtle"
       className={cn(masonryPlacement[span])}
     >
       <button
@@ -84,14 +84,14 @@ function GalleryFrame({
           alt={image.alt}
           className={cn(
             "transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
-            "group-hover:scale-[1.035] group-active:scale-[1.02]",
+            "group-hover:scale-[1.025] group-active:scale-[1.015]",
           )}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 280px"
         />
 
-        <span className="absolute inset-0 z-[1] bg-espresso-950/0 transition duration-500 group-hover:bg-espresso-950/18" />
+        <span className="absolute inset-0 z-[1] bg-espresso-950/0 transition duration-500 group-hover:bg-espresso-950/14" />
       </button>
-    </Reveal>
+    </RevealItem>
   );
 }
 
@@ -112,7 +112,7 @@ export function GallerySection() {
       <FloralAccent preset="gallery" />
 
       <div className="relative z-[1]">
-        <Reveal variant="fadeUp">
+        <Reveal variant="fadeUp" intensity="subtle">
           <SectionHeading
             eyebrow={wedding.copy.galleryEyebrow}
             title={wedding.copy.galleryTitle}
@@ -120,7 +120,8 @@ export function GallerySection() {
           />
         </Reveal>
 
-        <div
+        <Stagger
+          tone="gallery"
           className={cn(
             "mt-3 grid auto-rows-[minmax(8.5rem,auto)] grid-cols-2 gap-3",
             "sm:mt-5 sm:auto-rows-[minmax(10.5rem,auto)] sm:gap-4",
@@ -136,7 +137,7 @@ export function GallerySection() {
               onOpen={setActive}
             />
           ))}
-        </div>
+        </Stagger>
       </div>
 
       <Lightbox

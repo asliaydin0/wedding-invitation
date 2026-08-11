@@ -18,7 +18,7 @@ export function VenueSection() {
       eyebrow={wedding.copy.venueEyebrow}
       title={wedding.copy.venueTitle}
     >
-      <Reveal variant="scale">
+      <Reveal variant="fadeUp" intensity="subtle">
         <VintageCard
           rotate="subtle-right"
           padded="sm"
@@ -63,7 +63,7 @@ export function VenueSection() {
         </VintageCard>
       </Reveal>
 
-      <Reveal variant="fadeUp" className="text-center">
+      <Reveal variant="fadeUp" intensity="subtle" delay={0.06} className="text-center">
         <Typography
           as="h3"
           variant="heading"

@@ -19,7 +19,7 @@ export function DateTimeSection() {
       title={wedding.copy.dateTimeTitle}
       className="text-center"
     >
-      <Reveal variant="blur">
+      <Reveal variant="fadeUp" intensity="subtle">
         <OrnamentalFrame
           tone="antique"
           padding="lg"

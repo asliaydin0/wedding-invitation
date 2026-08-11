@@ -15,7 +15,7 @@ export function CountdownSection() {
       subtitle={wedding.copy.countdownSubtitle}
       className="text-center"
     >
-      <Reveal variant="blur">
+      <Reveal variant="fadeUp" intensity="subtle">
         <CountdownTimer
           targetISO={wedding.event.dateISO}
           labels={wedding.copy.countdownLabels}
