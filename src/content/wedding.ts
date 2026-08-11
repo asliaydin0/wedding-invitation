@@ -93,10 +93,18 @@ export const wedding = {
     rsvpAttending: "Katılacağım",
     rsvpDeclining: "Katılamayacağım",
     rsvpGuestsLabel: "Kişi sayısı",
-    rsvpMessageLabel: "Mesajınız",
+    rsvpMessageLabel: "Mesaj",
     rsvpMessagePlaceholder: "Birkaç satır bırakabilirsiniz…",
-    rsvpSubmit: "GÖNDER",
-    rsvpSuccess: "Teşekkürler — yanıtınız bize ulaştı.",
+    rsvpSubmit: "Yanıtımı Gönder",
+    rsvpSubmitting: "Gönderiliyor…",
+    rsvpSuccess: "Teşekkür ederiz. Yanıtınız alındı.",
+    rsvpErrorNameRequired: "Lütfen adınızı yazın.",
+    rsvpErrorNameShort: "Ad en az 2 karakter olmalı.",
+    rsvpErrorStatus: "Lütfen katılım durumunu seçin.",
+    rsvpErrorGuests: "Kişi sayısı 1–10 arasında olmalı.",
+    rsvpErrorMessage: "Mesaj çok uzun (en fazla 500 karakter).",
+    rsvpErrorNetwork: "Bağlantı hatası. Lütfen tekrar deneyin.",
+    rsvpErrorGeneric: "Gönderilemedi. Lütfen tekrar deneyin.",
     footerEyebrow: "WITH LOVE",
     footerNote: "Sevgiyle bekliyoruz",
     footerMessage:
@@ -154,6 +162,8 @@ export const wedding = {
   },
 
   rsvp: {
+    /** mock | api | supabase | firebase */
+    provider: "mock" as const,
     endpoint: "/api/rsvp",
   },
 } as const;

@@ -7,6 +7,17 @@ export type RsvpPayload = {
   message?: string;
 };
 
+export type RsvpFieldErrors = Partial<
+  Record<"name" | "status" | "guests" | "message" | "form", string>
+>;
+
+export type RsvpResult =
+  | { ok: true; id?: string }
+  | { ok: false; error: string; fieldErrors?: RsvpFieldErrors };
+
+/** Backend provider switch — change in content config */
+export type RsvpProvider = "mock" | "api" | "supabase" | "firebase";
+
 export type GalleryImage = {
   src: string;
   alt: string;
@@ -16,8 +27,5 @@ export type GalleryImage = {
 /** sealed → opening → open */
 export type InvitationPhase = "sealed" | "opening" | "open";
 
-/** Total opening choreography duration (ms) before phase becomes `open` */
 export const INVITATION_OPEN_MS = 1800;
-
-/** Reduced-motion shortcut duration */
 export const INVITATION_OPEN_REDUCED_MS = 400;
