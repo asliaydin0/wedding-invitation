@@ -61,6 +61,13 @@ export const wedding = {
     countdownTitle: "Buluşmaya Kalan",
     countdownEyebrow: "COUNTDOWN",
     countdownSubtitle: "Bu özel ana kalan zamanı heyecanla sayıyoruz",
+    countdownArrived: "The day has arrived.",
+    countdownLabels: {
+      days: "DAYS",
+      hours: "HOURS",
+      minutes: "MINUTES",
+      seconds: "SECONDS",
+    },
     mapCta: "YOL TARİFİ",
     galleryTitle: "En güzel anlarımız",
     galleryEyebrow: "GALLERY",

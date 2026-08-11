@@ -5,6 +5,7 @@ export function cn(...inputs: Array<string | false | null | undefined>): string 
 export function formatCountdown(targetISO: string) {
   const target = new Date(targetISO).getTime();
   const now = Date.now();
+  const isPast = Number.isFinite(target) && now >= target;
   const diff = Math.max(0, target - now);
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -12,5 +13,8 @@ export function formatCountdown(targetISO: string) {
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  return { days, hours, minutes, seconds, isPast: diff === 0 };
+  return { days, hours, minutes, seconds, isPast };
 }
+
+export type CountdownValue = ReturnType<typeof formatCountdown>;
+

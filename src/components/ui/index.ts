@@ -11,3 +11,4 @@ export { ScrollIndicator } from "@/components/ui/ScrollIndicator";
 export { Reveal } from "@/components/ui/Reveal";
 export { Lightbox } from "@/components/ui/Lightbox";
 export { InvitationImage } from "@/components/ui/InvitationImage";
+export { CountdownTimer } from "@/components/ui/CountdownTimer";
