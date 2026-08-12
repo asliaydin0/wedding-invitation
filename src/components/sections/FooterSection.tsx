@@ -5,9 +5,13 @@ import { Divider } from "@/components/ui/Divider";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { Typography } from "@/components/ui/Typography";
-import { wedding } from "@/content/wedding";
+import type { WeddingData } from "@/config";
 
-export function FooterSection() {
+type Props = {
+  data: WeddingData["footer"];
+};
+
+export function FooterSection({ data }: Props) {
   return (
     <footer id="finale" aria-label="Kapanış mesajı">
       <Section className="relative overflow-x-clip pb-[max(7rem,calc(var(--safe-bottom)+5.5rem))] pt-10 text-center">
@@ -16,14 +20,14 @@ export function FooterSection() {
         <Reveal variant="fade" intensity="subtle">
           <div className="relative z-20 px-4 py-10 sm:px-6 sm:py-12">
             <Typography variant="eyebrow" tone="gold" className="mb-6">
-              {wedding.copy.footerEyebrow}
+              {data.eyebrow}
             </Typography>
 
             <Typography
               variant="script"
               className="mb-2 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400 drop-shadow-[0_1px_12px_rgb(21_17_14/0.5)]"
             >
-              {wedding.couple.partnerOne}
+              {data.brideName}
             </Typography>
             <Typography variant="caption" tone="gold" className="mb-2">
               &
@@ -32,7 +36,7 @@ export function FooterSection() {
               variant="script"
               className="mb-8 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400 drop-shadow-[0_1px_12px_rgb(21_17_14/0.5)]"
             >
-              {wedding.couple.partnerTwo}
+              {data.groomName}
             </Typography>
 
             <Divider className="mb-8" />
@@ -43,17 +47,35 @@ export function FooterSection() {
                 tone="onDarkMuted"
                 className="mx-auto mb-8 max-w-xs leading-relaxed"
               >
-                {wedding.copy.footerMessage}
+                {data.message}
               </Typography>
               <Typography variant="caption" tone="onDarkMuted">
-                {wedding.event.dateDisplay} · {wedding.event.timeLabel}
+                {data.dateDisplay} · {data.time}
               </Typography>
+
+              {data.socialLinks.length > 0 ? (
+                <ul className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                  {data.socialLinks.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-serif text-sm tracking-wide text-gold-400/80 underline-offset-4 transition hover:text-gold-300 hover:underline"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
               <Typography
                 variant="bodySans"
                 tone="onDarkMuted"
                 className="mt-10 text-xs tracking-wide"
               >
-                {wedding.copy.footerNote}
+                {data.note}
               </Typography>
             </Reveal>
           </div>

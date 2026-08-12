@@ -12,7 +12,7 @@ import {
   warmGlowVariants,
 } from "@/lib/motion";
 import { cn } from "@/lib/utils";
-import { wedding } from "@/content/wedding";
+import type { WeddingData } from "@/config";
 
 function GatePanel({
   side,
@@ -107,10 +107,12 @@ function SealButton({
   phase,
   onOpen,
   reduced,
+  sealHint,
 }: {
   phase: "sealed" | "opening";
   onOpen: () => void;
   reduced: boolean;
+  sealHint: string;
 }) {
   const interactive = phase === "sealed";
   const sealAnimate =
@@ -145,7 +147,7 @@ function SealButton({
         type="button"
         disabled={!interactive}
         onClick={onOpen}
-        aria-label={wedding.copy.sealHint}
+        aria-label={sealHint}
         className={cn(
           "group relative flex touch-target size-[4.75rem] items-center justify-center rounded-full bg-burgundy-600 text-ivory-50 shadow-seal outline-none sm:size-24",
           "focus-visible:ring-2 focus-visible:ring-gold-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory-100",
@@ -199,7 +201,10 @@ function SealButton({
  * Full-screen gatefold invitation cover.
  * AnimatePresence-compatible via forwarded ref.
  */
-export const SealGate = forwardRef<HTMLDivElement>(function SealGate(_, ref) {
+export const SealGate = forwardRef<
+  HTMLDivElement,
+  { data: WeddingData["opening"] }
+>(function SealGate({ data }, ref) {
   const { phase, openInvitation } = useInvitation();
   const { unlockAndPlay } = useAudio();
   const reduced = useReducedMotion() ?? false;
@@ -267,7 +272,12 @@ export const SealGate = forwardRef<HTMLDivElement>(function SealGate(_, ref) {
             </>
           )}
 
-          <SealButton phase={panelPhase} onOpen={handleOpen} reduced={reduced} />
+          <SealButton
+            phase={panelPhase}
+            onOpen={handleOpen}
+            reduced={reduced}
+            sealHint={data.sealHint}
+          />
         </div>
       </div>
 
@@ -281,7 +291,7 @@ export const SealGate = forwardRef<HTMLDivElement>(function SealGate(_, ref) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
         >
-          {wedding.copy.sealHint}
+          {data.sealHint}
         </motion.p>
       ) : null}
     </motion.div>

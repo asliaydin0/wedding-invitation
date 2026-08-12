@@ -3,20 +3,24 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { RsvpForm } from "@/components/rsvp/RsvpForm";
 import { InvitationSection, VintageCard } from "@/components/stationery";
-import { wedding } from "@/content/wedding";
+import type { WeddingData } from "@/config";
 
-export function RsvpSection() {
+type Props = {
+  data: WeddingData["rsvp"];
+};
+
+export function RsvpSection({ data }: Props) {
   return (
     <InvitationSection
       id="rsvp"
       floral="rsvp"
-      eyebrow={wedding.copy.rsvpEyebrow}
-      title={wedding.copy.rsvpTitle}
-      subtitle={wedding.copy.rsvpBody}
+      eyebrow={data.eyebrow}
+      title={data.title}
+      subtitle={data.body}
     >
       <Reveal variant="fadeUp" intensity="subtle">
-        <VintageCard rotate="subtle-left" tone="ivory" padded="md">
-          <RsvpForm />
+        <VintageCard tone="ivory" rotate="none" padded="md">
+          <RsvpForm data={data} />
         </VintageCard>
       </Reveal>
     </InvitationSection>

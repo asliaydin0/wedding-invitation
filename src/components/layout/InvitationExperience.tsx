@@ -6,25 +6,22 @@ import { MusicControl } from "@/components/ui/MusicControl";
 import { useFineFloralMotion } from "@/hooks/useFineFloralMotion";
 import { useInvitation } from "@/hooks/useInvitation";
 import { useScrollLock } from "@/hooks/useScrollLock";
+import type { WeddingData } from "@/config";
 import {
   contentReveal,
   contentRevealMobile,
   contentRevealReduced,
 } from "@/lib/motion";
-import { wedding } from "@/content/wedding";
 
 type Props = {
   children: React.ReactNode;
+  data: WeddingData;
 };
 
 /**
- * Orchestrates opening experience:
- * - locks scroll until invitation is open
- * - mounts SealGate while sealed/opening
- * - reveals main content (scale only on desktop; opacity on mobile)
- * - MusicControl sits at root (outside transforms) so fixed positioning works
+ * Orchestrates opening experience from config-driven `data`.
  */
-export function InvitationExperience({ children }: Props) {
+export function InvitationExperience({ children, data }: Props) {
   const { phase, isOpen, isSealed, isOpening } = useInvitation();
   const reduced = useReducedMotion() ?? false;
   const desktopMotion = useFineFloralMotion();
@@ -42,9 +39,11 @@ export function InvitationExperience({ children }: Props) {
 
   return (
     <>
-      <AnimatePresence>{!isOpen ? <SealGate key="seal-gate" /> : null}</AnimatePresence>
+      <AnimatePresence>
+        {!isOpen ? <SealGate key="seal-gate" data={data.opening} /> : null}
+      </AnimatePresence>
 
-      {wedding.audio.enabled ? <MusicControl /> : null}
+      {data.music.enabled ? <MusicControl /> : null}
 
       <motion.div
         variants={variants}

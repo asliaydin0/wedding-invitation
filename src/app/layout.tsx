@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cinzel, Cormorant_Garamond, Great_Vibes, Outfit } from "next/font/google";
 import { Providers } from "@/components/layout/Providers";
-import { wedding } from "@/content/wedding";
+import { weddingConfig } from "@/config";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -34,11 +34,11 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: wedding.meta.title,
-  description: wedding.meta.description,
+  title: weddingConfig.meta.title,
+  description: weddingConfig.meta.description,
   openGraph: {
-    title: wedding.meta.title,
-    description: wedding.meta.description,
+    title: weddingConfig.meta.title,
+    description: weddingConfig.meta.description,
     type: "website",
   },
 };

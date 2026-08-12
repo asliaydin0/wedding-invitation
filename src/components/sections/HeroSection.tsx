@@ -16,14 +16,17 @@ import {
   heroRoot,
   heroScrollHint,
 } from "@/lib/motion";
-import { wedding } from "@/content/wedding";
+import type { WeddingData } from "@/config";
 import { cn } from "@/lib/utils";
 
+type Props = {
+  data: WeddingData["hero"];
+};
+
 /**
- * Full-viewport hero — revealed after invitation opens.
- * Mobile-first: safe areas, fluid names, no overflow.
+ * Full-viewport hero — content comes only from `data` (config).
  */
-export function HeroSection() {
+export function HeroSection({ data }: Props) {
   const { isOpen } = useInvitation();
   const reduced = useReducedMotion() ?? false;
   const show = isOpen;
@@ -88,7 +91,7 @@ export function HeroSection() {
         >
           <motion.div variants={reduced ? undefined : heroMeta}>
             <Typography variant="eyebrow" tone="gold" className="mb-6 sm:mb-10">
-              {wedding.copy.heroEyebrow}
+              {data.eyebrow}
             </Typography>
           </motion.div>
 
@@ -101,7 +104,7 @@ export function HeroSection() {
                 "drop-shadow-[0_1px_12px_rgb(21_17_14/0.45)]",
               )}
             >
-              {wedding.couple.partnerOne}
+              {data.brideName}
             </motion.span>
 
             <motion.span
@@ -119,7 +122,7 @@ export function HeroSection() {
                 "drop-shadow-[0_1px_12px_rgb(21_17_14/0.45)]",
               )}
             >
-              {wedding.couple.partnerTwo}
+              {data.groomName}
             </motion.span>
           </h1>
 
@@ -133,7 +136,7 @@ export function HeroSection() {
               tone="onDarkMuted"
               className="px-2 text-ivory-100/70"
             >
-              {wedding.event.dateLabel}
+              {data.dateLabel}
             </Typography>
           </motion.div>
 
@@ -141,7 +144,7 @@ export function HeroSection() {
             variants={reduced ? undefined : heroMeta}
             className="mt-6 max-w-[16.5rem] px-1 font-serif text-[0.9rem] leading-relaxed text-ivory-100/65 italic sm:mt-8 sm:max-w-sm sm:text-base"
           >
-            “{wedding.copy.heroBody}”
+            “{data.body}”
           </motion.p>
         </div>
 

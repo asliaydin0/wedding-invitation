@@ -7,22 +7,23 @@ import { InvitationImage } from "@/components/ui/InvitationImage";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { galleryImages } from "@/content/gallery";
-import { wedding } from "@/content/wedding";
-import type { GalleryImage } from "@/types/invitation";
+import type { WeddingData, WeddingGalleryImage } from "@/config";
 import { cn } from "@/lib/utils";
 
+type Props = {
+  data: WeddingData["gallery"];
+};
+
 const masonryPlacement: Record<
-  NonNullable<GalleryImage["span"]>,
+  NonNullable<WeddingGalleryImage["span"]>,
   string
 > = {
-  /** On 2-col mobile, tall stays single column; wide spans both */
   tall: "row-span-2",
   wide: "col-span-2",
   square: "",
 };
 
-const aspectFallback: Record<NonNullable<GalleryImage["span"]>, string> = {
+const aspectFallback: Record<NonNullable<WeddingGalleryImage["span"]>, string> = {
   tall: "3 / 4",
   wide: "2 / 1",
   square: "1 / 1",
@@ -33,7 +34,7 @@ function GalleryFrame({
   index,
   onOpen,
 }: {
-  image: GalleryImage;
+  image: WeddingGalleryImage;
   index: number;
   onOpen: (i: number) => void;
 }) {
@@ -91,13 +92,13 @@ function GalleryFrame({
   );
 }
 
-export function GallerySection() {
+export function GallerySection({ data }: Props) {
   const images = useMemo(
     () =>
-      galleryImages.filter(
+      data.images.filter(
         (img) => typeof img.src === "string" && img.src.trim().length > 0,
       ),
-    [],
+    [data.images],
   );
   const [active, setActive] = useState<number | null>(null);
 
@@ -110,9 +111,9 @@ export function GallerySection() {
       <div className="relative z-[1] min-w-0">
         <Reveal variant="fadeUp" intensity="subtle">
           <SectionHeading
-            eyebrow={wedding.copy.galleryEyebrow}
-            title={wedding.copy.galleryTitle}
-            subtitle={wedding.copy.gallerySubtitle}
+            eyebrow={data.eyebrow}
+            title={data.title}
+            subtitle={data.subtitle}
           />
         </Reveal>
 

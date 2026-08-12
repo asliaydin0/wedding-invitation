@@ -8,15 +8,19 @@ import {
   VintageCard,
   VintageLink,
 } from "@/components/stationery";
-import { wedding } from "@/content/wedding";
+import type { WeddingData } from "@/config";
 
-export function VenueSection() {
+type Props = {
+  data: WeddingData["venue"];
+};
+
+export function VenueSection({ data }: Props) {
   return (
     <InvitationSection
       id="venue"
       floral="venue"
-      eyebrow={wedding.copy.venueEyebrow}
-      title={wedding.copy.venueTitle}
+      eyebrow={data.eyebrow}
+      title={data.title}
     >
       <Reveal variant="fadeUp" intensity="subtle">
         <VintageCard
@@ -70,18 +74,14 @@ export function VenueSection() {
           tone="onDark"
           className="mb-2 text-xl italic sm:text-2xl"
         >
-          {wedding.venue.name}
+          {data.name}
         </Typography>
         <Typography variant="bodySans" tone="onDarkMuted" className="mb-8">
-          {wedding.venue.addressDetail}
+          {data.address}
         </Typography>
 
-        <VintageLink
-          href={wedding.venue.mapsUrl}
-          variant="burgundy"
-          className="gap-2"
-        >
-          {wedding.copy.mapCta}
+        <VintageLink href={data.mapsUrl} variant="burgundy" className="gap-2">
+          {data.mapCta}
           <ArrowUpRight size={16} strokeWidth={1.5} />
         </VintageLink>
       </Reveal>

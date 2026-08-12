@@ -12,20 +12,27 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { RsvpSection } from "@/components/sections/RsvpSection";
 import { StorySection } from "@/components/sections/StorySection";
 import { VenueSection } from "@/components/sections/VenueSection";
+import { weddingData } from "@/config";
 
 function OpenedInvitation() {
   return (
-    <Atmosphere className="min-h-screen-mobile overflow-x-clip" withVignette={false} withGrain={false}>
+    <Atmosphere
+      className="min-h-screen-mobile overflow-x-clip"
+      withVignette={false}
+      withGrain={false}
+    >
       <InvitationShell>
-        <HeroSection />
-        <StorySection />
-        <DetailsSection />
-        <DateTimeSection />
-        <VenueSection />
-        <CountdownSection />
-        <GallerySection />
-        <RsvpSection />
-        <FooterSection />
+        <HeroSection data={weddingData.hero} />
+        <StorySection data={weddingData.story} />
+        <DetailsSection data={weddingData.details} />
+        <DateTimeSection data={weddingData.dateTime} />
+        <VenueSection data={weddingData.venue} />
+        <CountdownSection data={weddingData.countdown} />
+        <GallerySection data={weddingData.gallery} />
+        {weddingData.rsvp.enabled ? (
+          <RsvpSection data={weddingData.rsvp} />
+        ) : null}
+        <FooterSection data={weddingData.footer} />
       </InvitationShell>
     </Atmosphere>
   );
@@ -33,7 +40,7 @@ function OpenedInvitation() {
 
 export default function HomePage() {
   return (
-    <InvitationExperience>
+    <InvitationExperience data={weddingData}>
       <OpenedInvitation />
     </InvitationExperience>
   );

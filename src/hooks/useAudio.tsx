@@ -10,7 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { wedding } from "@/content/wedding";
+import { weddingConfig } from "@/config";
 
 const PREF_KEY = "wedding-music-pref";
 
@@ -59,12 +59,12 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const loadAttemptedRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [loadState, setLoadState] = useState<LoadState>(
-    wedding.audio.enabled ? "idle" : "error",
+    weddingConfig.music.enabled ? "idle" : "error",
   );
   const [isMutedPref, setIsMutedPref] = useState(false);
 
   useEffect(() => {
-    if (!wedding.audio.enabled) return;
+    if (!weddingConfig.music.enabled) return;
 
     setIsMutedPref(readPref() === "off");
 
@@ -118,7 +118,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     if (!audio || loadState === "error") return null;
     if (!audio.src || !loadAttemptedRef.current) {
       loadAttemptedRef.current = true;
-      audio.src = wedding.audio.src;
+      audio.src = weddingConfig.music.src;
       try {
         audio.load();
       } catch {
@@ -170,7 +170,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   }, [loadState, play, pause]);
 
   const unlockAndPlay = useCallback(() => {
-    if (!wedding.audio.autoPlayOnOpen) return;
+    if (!weddingConfig.music.autoPlayOnOpen) return;
     if (loadState === "error") return;
     if (readPref() === "off") return;
     void play();

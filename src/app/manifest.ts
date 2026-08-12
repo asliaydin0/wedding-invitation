@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import { weddingConfig } from "@/config";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Düğün Davetiyesi",
-    short_name: "Davetiye",
-    description: "Dijital düğün davetiyesi",
+    name: weddingConfig.meta.title,
+    short_name: `${weddingConfig.brideName} & ${weddingConfig.groomName}`,
+    description: weddingConfig.meta.description,
     start_url: "/",
     display: "standalone",
     background_color: "#1f1914",

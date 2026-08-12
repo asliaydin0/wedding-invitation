@@ -3,23 +3,27 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { CountdownTimer } from "@/components/ui/CountdownTimer";
 import { InvitationSection } from "@/components/stationery";
-import { wedding } from "@/content/wedding";
+import type { WeddingData } from "@/config";
 
-export function CountdownSection() {
+type Props = {
+  data: WeddingData["countdown"];
+};
+
+export function CountdownSection({ data }: Props) {
   return (
     <InvitationSection
       id="countdown"
       floral="countdown"
-      eyebrow={wedding.copy.countdownEyebrow}
-      title={wedding.copy.countdownTitle}
-      subtitle={wedding.copy.countdownSubtitle}
-      className="text-center"
+      eyebrow={data.eyebrow}
+      title={data.title}
+      subtitle={data.subtitle}
+      compact
     >
       <Reveal variant="fadeUp" intensity="subtle">
         <CountdownTimer
-          targetISO={wedding.event.dateISO}
-          labels={wedding.copy.countdownLabels}
-          arrivedMessage={wedding.copy.countdownArrived}
+          targetISO={data.targetISO}
+          labels={data.labels}
+          arrivedMessage={data.arrivedMessage}
         />
       </Reveal>
     </InvitationSection>

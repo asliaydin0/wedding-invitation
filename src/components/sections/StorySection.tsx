@@ -5,15 +5,19 @@ import { InvitationImage } from "@/components/ui/InvitationImage";
 import { Parallax } from "@/components/ui/Parallax";
 import { Reveal } from "@/components/ui/Reveal";
 import { Typography } from "@/components/ui/Typography";
-import { wedding } from "@/content/wedding";
+import type { WeddingData } from "@/config";
 
-export function StorySection() {
+type Props = {
+  data: WeddingData["story"];
+};
+
+export function StorySection({ data }: Props) {
   return (
     <InvitationSection
       id="story"
       floral="story"
-      eyebrow={wedding.story.eyebrow}
-      title={wedding.story.title}
+      eyebrow={data.eyebrow}
+      title={data.title}
     >
       <div className="grid gap-10 sm:gap-12">
         <Reveal
@@ -25,8 +29,8 @@ export function StorySection() {
             <OrnamentalFrame tone="antique" padding="sm" className="bg-ivory-100/90">
               <div className="relative aspect-[3/4] overflow-hidden bg-beige-300/40">
                 <InvitationImage
-                  src={wedding.storyImage.src}
-                  alt={wedding.storyImage.alt}
+                  src={data.image.src}
+                  alt={data.image.alt}
                   sizes="(max-width: 448px) 80vw, 256px"
                   priority
                 />
@@ -58,7 +62,7 @@ export function StorySection() {
           delay={0.08}
           className="space-y-5 px-1 text-center"
         >
-          {wedding.story.paragraphs.map((p) => (
+          {data.paragraphs.map((p) => (
             <Typography
               key={p.slice(0, 24)}
               variant="body"
@@ -72,7 +76,7 @@ export function StorySection() {
             variant="script"
             className="pt-2 text-[clamp(1.75rem,8vw,2.25rem)] text-burgundy-400 sm:text-4xl"
           >
-            {wedding.couple.partnerOne} & {wedding.couple.partnerTwo}
+            {data.brideName} & {data.groomName}
           </Typography>
         </Reveal>
       </div>

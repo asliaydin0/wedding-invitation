@@ -9,45 +9,26 @@ import {
   VintageCard,
   VintageLink,
 } from "@/components/stationery";
-import { buildGoogleCalendarUrl } from "@/lib/calendar";
-import { wedding } from "@/content/wedding";
+import type { WeddingData } from "@/config";
 
-const detailRows = [
-  {
-    label: wedding.copy.detailsVenueLabel,
-    value: wedding.venue.name,
-  },
-  {
-    label: wedding.copy.detailsAddressLabel,
-    value: wedding.venue.addressDetail,
-  },
-  {
-    label: wedding.copy.detailsDateLabel,
-    value: wedding.event.dateDisplay,
-    hint: wedding.event.dayLabel,
-  },
-  {
-    label: wedding.copy.detailsTimeLabel,
-    value: wedding.event.timeLabel,
-  },
-] as const;
+type Props = {
+  data: WeddingData["details"];
+};
 
-export function DetailsSection() {
-  const calendarUrl = buildGoogleCalendarUrl({
-    title: wedding.event.calendarTitle,
-    description: wedding.event.calendarDescription,
-    location: wedding.venue.addressDetail,
-    startISO: wedding.event.dateISO,
-    durationHours: wedding.event.durationHours,
-    timezone: wedding.event.timezone,
-  });
+export function DetailsSection({ data }: Props) {
+  const detailRows = [
+    { label: data.venueLabel, value: data.venue },
+    { label: data.addressLabel, value: data.address },
+    { label: data.dateLabel, value: data.dateDisplay, hint: data.dayLabel },
+    { label: data.timeLabel, value: data.time },
+  ] as const;
 
   return (
     <InvitationSection
       id="details"
       floral="details"
-      eyebrow={wedding.copy.detailsEyebrow}
-      title={wedding.copy.detailsTitle}
+      eyebrow={data.eyebrow}
+      title={data.title}
       compact
     >
       <Reveal variant="fadeUp" intensity="subtle">
@@ -55,14 +36,21 @@ export function DetailsSection() {
           <div className="space-y-5 text-left">
             {detailRows.map((row, i) => (
               <div key={row.label}>
-                {i > 0 ? <GoldDivider variant="line" className="mb-5" max="full" align="stretch" /> : null}
+                {i > 0 ? (
+                  <GoldDivider
+                    variant="line"
+                    className="mb-5"
+                    max="full"
+                    align="stretch"
+                  />
+                ) : null}
                 <Typography variant="label" tone="muted" className="mb-1.5 block">
                   {row.label}
                 </Typography>
                 <Typography
                   variant="heading"
                   tone="ink"
-                  className="text-[1.15rem] leading-snug sm:text-xl"
+                  className="text-lg sm:text-xl"
                 >
                   {row.value}
                 </Typography>
@@ -79,23 +67,23 @@ export function DetailsSection() {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
             <VintageLink
-              href={wedding.venue.mapsUrl}
+              href={data.mapsUrl}
               variant="burgundy"
               size="sm"
               className="w-full sm:w-auto"
             >
               <Navigation size={15} strokeWidth={1.5} />
-              {wedding.copy.mapCta}
+              {data.mapCta}
             </VintageLink>
 
             <VintageLink
-              href={calendarUrl}
+              href={data.calendarUrl}
               variant="outline"
               size="sm"
               className="w-full border-brown-500/25 text-ink hover:border-gold-500/50 hover:text-burgundy-600 sm:w-auto"
             >
               <CalendarPlus size={15} strokeWidth={1.5} />
-              {wedding.copy.calendarCta}
+              {data.calendarCta}
             </VintageLink>
           </div>
 

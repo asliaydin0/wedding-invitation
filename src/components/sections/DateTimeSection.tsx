@@ -2,63 +2,44 @@
 
 import { Reveal } from "@/components/ui/Reveal";
 import { Typography } from "@/components/ui/Typography";
-import {
-  GoldDivider,
-  InvitationSection,
-  OrnamentalFrame,
-  WaxSeal,
-} from "@/components/stationery";
-import { wedding } from "@/content/wedding";
+import { InvitationSection, VintageCard } from "@/components/stationery";
+import type { WeddingData } from "@/config";
 
-export function DateTimeSection() {
+type Props = {
+  data: WeddingData["dateTime"];
+};
+
+export function DateTimeSection({ data }: Props) {
   return (
     <InvitationSection
       id="datetime"
       floral="datetime"
-      eyebrow={wedding.copy.dateTimeEyebrow}
-      title={wedding.copy.dateTimeTitle}
-      className="text-center"
+      eyebrow={data.eyebrow}
+      title={data.title}
+      compact
     >
       <Reveal variant="fadeUp" intensity="subtle">
-        <OrnamentalFrame
-          tone="antique"
-          padding="lg"
-          className="bg-espresso-800/40 backdrop-blur-[2px]"
-        >
+        <VintageCard tone="cream" rotate="none" padded="md" className="text-center">
           <Typography variant="caption" tone="gold" className="mb-5">
-            {wedding.event.dayLabel}
+            {data.dayLabel}
           </Typography>
-
           <Typography
-            as="p"
             variant="display"
-            tone="onDark"
-            className="text-[clamp(1.6rem,7vw,2.15rem)] text-ivory-50"
+            tone="ink"
+            className="text-[clamp(1.6rem,7vw,2.15rem)] text-espresso-900"
           >
-            {wedding.event.dateDisplay}
+            {data.dateDisplay}
           </Typography>
-
-          <GoldDivider className="my-6" />
-
           <Typography
             variant="script"
-            className="text-4xl text-burgundy-400 sm:text-5xl"
+            className="mt-3 text-3xl text-burgundy-500 sm:text-4xl"
           >
-            {wedding.event.timeLabel}
+            {data.time}
           </Typography>
-
-          <Typography
-            variant="body"
-            tone="onDarkMuted"
-            className="mx-auto mt-6 max-w-xs"
-          >
-            {wedding.copy.dateTimeNote}
+          <Typography variant="body" tone="muted" className="mt-6">
+            {data.note}
           </Typography>
-
-          <div className="mt-8 flex justify-center">
-            <WaxSeal size="sm" decorative pulse={false} />
-          </div>
-        </OrnamentalFrame>
+        </VintageCard>
       </Reveal>
     </InvitationSection>
   );

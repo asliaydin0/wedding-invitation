@@ -8,19 +8,19 @@ import { Typography } from "@/components/ui/Typography";
 import { VintageButton } from "@/components/stationery";
 import { submitRsvp } from "@/lib/rsvp/submitRsvp";
 import { validateRsvp } from "@/lib/rsvp/validate";
-import { wedding } from "@/content/wedding";
+import type { WeddingData } from "@/config";
 import type { RsvpFieldErrors, RsvpStatus } from "@/types/invitation";
 import { cn } from "@/lib/utils";
 
 type Props = {
+  data: WeddingData["rsvp"];
   className?: string;
 };
 
 /**
- * Premium RSVP form — underline fields, validation, loading/error.
- * Submit goes through lib/rsvp/submitRsvp (mock | api | supabase | firebase).
+ * Premium RSVP form — all labels/errors come from config via `data`.
  */
-export function RsvpForm({ className }: Props) {
+export function RsvpForm({ data, className }: Props) {
   const formId = useId();
   const [name, setName] = useState("");
   const [status, setStatus] = useState<RsvpStatus | "">("");
@@ -41,11 +41,11 @@ export function RsvpForm({ className }: Props) {
     const result = validateRsvp(
       { name, status, guests, message },
       {
-        nameRequired: wedding.copy.rsvpErrorNameRequired,
-        nameTooShort: wedding.copy.rsvpErrorNameShort,
-        statusRequired: wedding.copy.rsvpErrorStatus,
-        guestsInvalid: wedding.copy.rsvpErrorGuests,
-        messageTooLong: wedding.copy.rsvpErrorMessage,
+        nameRequired: data.errors.nameRequired,
+        nameTooShort: data.errors.nameTooShort,
+        statusRequired: data.errors.statusRequired,
+        guestsInvalid: data.errors.guestsInvalid,
+        messageTooLong: data.errors.messageTooLong,
       },
     );
 
@@ -63,9 +63,7 @@ export function RsvpForm({ className }: Props) {
 
     if (!response.ok) {
       setFormError(
-        response.error === "network"
-          ? wedding.copy.rsvpErrorNetwork
-          : wedding.copy.rsvpErrorGeneric,
+        response.error === "network" ? data.errors.network : data.errors.generic,
       );
       return;
     }
@@ -84,7 +82,7 @@ export function RsvpForm({ className }: Props) {
           <Check size={24} strokeWidth={1.5} aria-hidden />
         </span>
         <Typography variant="heading" tone="ink" className="max-w-xs text-xl">
-          {wedding.copy.rsvpSuccess}
+          {data.success}
         </Typography>
       </div>
     );
@@ -99,8 +97,8 @@ export function RsvpForm({ className }: Props) {
     >
       <Input
         name="name"
-        label={wedding.copy.rsvpNameLabel}
-        placeholder={wedding.copy.rsvpNamePlaceholder}
+        label={data.nameLabel}
+        placeholder={data.namePlaceholder}
         autoComplete="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -109,20 +107,18 @@ export function RsvpForm({ className }: Props) {
       />
 
       <fieldset aria-describedby={errors.status ? `${statusGroupId}-error` : undefined}>
-        <legend className="text-label mb-3 text-ink-muted">
-          {wedding.copy.rsvpStatusLabel}
-        </legend>
+        <legend className="text-label mb-3 text-ink-muted">{data.statusLabel}</legend>
         <div
           id={statusGroupId}
           role="radiogroup"
-          aria-label={wedding.copy.rsvpStatusLabel}
+          aria-label={data.statusLabel}
           aria-required="true"
           className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"
         >
           {(
             [
-              ["attending", wedding.copy.rsvpAttending],
-              ["declining", wedding.copy.rsvpDeclining],
+              ["attending", data.attending],
+              ["declining", data.declining],
             ] as const
           ).map(([value, label]) => {
             const selected = status === value;
@@ -171,7 +167,7 @@ export function RsvpForm({ className }: Props) {
 
       <div className="flex w-full flex-col gap-2 text-left">
         <label htmlFor={`${formId}-guests`} className="text-label text-ink-muted">
-          {wedding.copy.rsvpGuestsLabel}
+          {data.guestsLabel}
         </label>
         <select
           id={`${formId}-guests`}
@@ -210,8 +206,8 @@ export function RsvpForm({ className }: Props) {
 
       <Textarea
         name="message"
-        label={wedding.copy.rsvpMessageLabel}
-        placeholder={wedding.copy.rsvpMessagePlaceholder}
+        label={data.messageLabel}
+        placeholder={data.messagePlaceholder}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         error={errors.message}
@@ -236,10 +232,10 @@ export function RsvpForm({ className }: Props) {
         {submitting ? (
           <span className="inline-flex items-center gap-2">
             <LoaderCircle size={16} className="animate-spin" aria-hidden />
-            {wedding.copy.rsvpSubmitting}
+            {data.submitting}
           </span>
         ) : (
-          wedding.copy.rsvpSubmit
+          data.submit
         )}
       </VintageButton>
     </form>
