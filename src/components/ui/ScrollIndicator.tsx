@@ -23,12 +23,12 @@ export function ScrollIndicator({
       href={href}
       aria-label={label}
       className={cn(
-        "group inline-flex min-h-11 min-w-11 flex-col items-center justify-center gap-1.5 px-3 text-ivory-100/45 transition hover:text-ivory-100/70",
+        "group inline-flex min-h-11 min-w-11 flex-col items-center justify-center gap-1.5 px-3 text-ivory-100/50 transition hover:text-ivory-100/75",
         className,
       )}
     >
-      <span className="font-serif text-[0.62rem] tracking-[0.28em] uppercase sm:text-[0.65rem]">
-        Scroll
+      <span className="font-serif text-[0.62rem] tracking-[0.22em] uppercase sm:text-[0.65rem]">
+        {label}
       </span>
       <motion.span
         aria-hidden

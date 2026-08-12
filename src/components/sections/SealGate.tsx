@@ -283,7 +283,7 @@ export const SealGate = forwardRef<
 
       {phase === "sealed" ? (
         <motion.p
-          className="pointer-events-none absolute left-1/2 z-40 w-full max-w-xs -translate-x-1/2 px-5 text-center font-serif text-[0.65rem] tracking-[0.2em] text-ivory-100/55 uppercase sm:px-6 sm:text-xs sm:tracking-[0.22em]"
+          className="pointer-events-none absolute left-1/2 z-40 w-full max-w-xs -translate-x-1/2 px-5 text-center font-serif text-[0.65rem] tracking-[0.2em] text-ivory-100/75 uppercase sm:px-6 sm:text-xs sm:tracking-[0.22em]"
           style={{
             bottom: "max(2rem, calc(var(--safe-bottom) + 1.5rem))",
           }}

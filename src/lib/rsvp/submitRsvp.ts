@@ -11,9 +11,11 @@ export async function submitRsvp(payload: RsvpPayload): Promise<RsvpResult> {
     case "api":
       return submitViaApi(payload);
     case "supabase":
-      return submitViaSupabase(payload);
     case "firebase":
-      return submitViaFirebase(payload);
+      return {
+        ok: false,
+        error: `${provider} provider not configured yet.`,
+      };
     case "mock":
     default:
       return submitViaMock(payload);
@@ -22,7 +24,9 @@ export async function submitRsvp(payload: RsvpPayload): Promise<RsvpResult> {
 
 async function submitViaMock(payload: RsvpPayload): Promise<RsvpResult> {
   await new Promise((r) => setTimeout(r, 900));
-  console.info("[RSVP mock]", payload);
+  if (process.env.NODE_ENV === "development") {
+    console.info("[RSVP mock]", payload);
+  }
   return { ok: true, id: `mock_${Date.now()}` };
 }
 
@@ -45,12 +49,4 @@ async function submitViaApi(payload: RsvpPayload): Promise<RsvpResult> {
   } catch {
     return { ok: false, error: "network" };
   }
-}
-
-async function submitViaSupabase(_payload: RsvpPayload): Promise<RsvpResult> {
-  return { ok: false, error: "Supabase provider not configured yet." };
-}
-
-async function submitViaFirebase(_payload: RsvpPayload): Promise<RsvpResult> {
-  return { ok: false, error: "Firebase provider not configured yet." };
 }

@@ -10,6 +10,7 @@ export type RsvpFormValues = {
 type ValidateMessages = {
   nameRequired: string;
   nameTooShort: string;
+  nameTooLong: string;
   statusRequired: string;
   guestsInvalid: string;
   messageTooLong: string;
@@ -34,7 +35,7 @@ export function validateRsvp(
   } else if (name.length < NAME_MIN) {
     errors.name = messages.nameTooShort;
   } else if (name.length > NAME_MAX) {
-    errors.name = messages.nameTooShort;
+    errors.name = messages.nameTooLong;
   }
 
   if (values.status !== "attending" && values.status !== "declining") {

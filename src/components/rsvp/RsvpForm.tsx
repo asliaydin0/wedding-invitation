@@ -43,6 +43,7 @@ export function RsvpForm({ data, className }: Props) {
       {
         nameRequired: data.errors.nameRequired,
         nameTooShort: data.errors.nameTooShort,
+        nameTooLong: data.errors.nameTooLong,
         statusRequired: data.errors.statusRequired,
         guestsInvalid: data.errors.guestsInvalid,
         messageTooLong: data.errors.messageTooLong,
@@ -104,6 +105,9 @@ export function RsvpForm({ data, className }: Props) {
         onChange={(e) => setName(e.target.value)}
         error={errors.name}
         disabled={submitting}
+        required
+        maxLength={80}
+        aria-required="true"
       />
 
       <fieldset aria-describedby={errors.status ? `${statusGroupId}-error` : undefined}>
@@ -122,27 +126,35 @@ export function RsvpForm({ data, className }: Props) {
             ] as const
           ).map(([value, label]) => {
             const selected = status === value;
+            const optionId = `${statusGroupId}-${value}`;
             return (
-              <button
+              <label
                 key={value}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                disabled={submitting}
-                onClick={() => {
-                  setStatus(value);
-                  if (value === "declining") setGuests(0);
-                  if (value === "attending" && guests < 1) setGuests(1);
-                }}
+                htmlFor={optionId}
                 className={cn(
-                  "flex min-h-11 items-center gap-2.5 rounded-sm border px-3 py-3 text-left font-serif text-sm transition",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy-500/40",
+                  "flex min-h-11 cursor-pointer items-center gap-2.5 rounded-sm border px-3 py-3 text-left font-serif text-sm transition",
+                  "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-burgundy-500/40",
                   selected
                     ? "border-burgundy-500/45 bg-burgundy-500/8 text-ink"
                     : "border-brown-500/20 text-ink-soft hover:border-brown-500/35",
                   errors.status && !selected && "border-burgundy-500/40",
+                  submitting && "pointer-events-none opacity-60",
                 )}
               >
+                <input
+                  id={optionId}
+                  type="radio"
+                  name={`${formId}-status`}
+                  value={value}
+                  checked={selected}
+                  disabled={submitting}
+                  onChange={() => {
+                    setStatus(value);
+                    if (value === "declining") setGuests(0);
+                    if (value === "attending" && guests < 1) setGuests(1);
+                  }}
+                  className="sr-only"
+                />
                 <Heart
                   size={14}
                   strokeWidth={1.5}
@@ -150,7 +162,7 @@ export function RsvpForm({ data, className }: Props) {
                   className={selected ? "fill-burgundy-500 text-burgundy-500" : ""}
                 />
                 {label}
-              </button>
+              </label>
             );
           })}
         </div>
@@ -212,6 +224,7 @@ export function RsvpForm({ data, className }: Props) {
         onChange={(e) => setMessage(e.target.value)}
         error={errors.message}
         disabled={submitting}
+        maxLength={500}
       />
 
       <div aria-live="assertive" aria-atomic="true">

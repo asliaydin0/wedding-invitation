@@ -78,6 +78,7 @@ function Separator() {
 }
 
 function TimerSkeleton({ labels }: { labels: CountdownLabels }) {
+  const units = [labels.days, labels.hours, labels.minutes, labels.seconds];
   return (
     <div className="px-0.5 sm:px-1">
       <GoldDivider variant="ornament" className="mb-5 sm:mb-7" max="lg" />
@@ -87,14 +88,26 @@ function TimerSkeleton({ labels }: { labels: CountdownLabels }) {
         aria-busy="true"
         aria-label="Geri sayım yükleniyor"
       >
-        {([labels.days, labels.hours, labels.minutes, labels.seconds] as const).map(
-          (label, i) => (
-            <div key={label} className="contents">
-              {i > 0 ? <Separator /> : null}
-              <FlipDigit value={0} label={label} />
+        {units.map((label, i) => (
+          <div key={label} className="contents">
+            {i > 0 ? <Separator /> : null}
+            <div className="flex min-w-0 flex-1 flex-col items-center gap-1.5 sm:gap-2.5">
+              <div
+                className={cn(
+                  "relative flex h-10 w-full max-w-[3.5rem] items-center justify-center overflow-hidden sm:h-[3.35rem] sm:max-w-none",
+                  "mx-auto rounded-[2px] border border-brown-500/12 bg-ivory-50/70",
+                )}
+              >
+                <span className="font-serif text-[clamp(1.35rem,6.5vw,2.65rem)] font-medium leading-none tracking-wide text-burgundy-500/35">
+                  00
+                </span>
+              </div>
+              <span className="max-w-full truncate px-0.5 text-center font-display text-[0.5rem] font-medium tracking-[0.14em] text-brown-500/70 uppercase sm:text-[0.62rem] sm:tracking-[0.22em]">
+                {label}
+              </span>
             </div>
-          ),
-        )}
+          </div>
+        ))}
       </div>
       <GoldDivider variant="line" className="mt-5 sm:mt-7" max="sm" />
     </div>

@@ -95,6 +95,7 @@ export type WeddingConfig = {
     errors: {
       nameRequired: string;
       nameTooShort: string;
+      nameTooLong: string;
       statusRequired: string;
       guestsInvalid: string;
       messageTooLong: string;

@@ -23,7 +23,7 @@ export function StorySection({ data }: Props) {
         <Reveal
           variant="clip"
           intensity="subtle"
-          className="relative mx-auto w-full max-w-[min(100%,16rem)] overflow-visible"
+          className="relative mx-auto w-full max-w-[min(100%,16rem)] overflow-hidden"
         >
           <Parallax intensity={0.18}>
             <OrnamentalFrame tone="antique" padding="sm" className="bg-ivory-100/90">

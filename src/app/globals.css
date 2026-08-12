@@ -167,13 +167,14 @@
     font-family: var(--font-sans);
     font-weight: 300;
     text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
     overflow-x: clip;
     overscroll-behavior-x: none;
     /* Fill mobile browser chrome correctly */
     min-height: 100vh;
     min-height: 100svh;
-    min-height: 100dvh;
     min-height: -webkit-fill-available;
+    min-height: 100dvh;
   }
 
   /* Avoid accidental horizontal scroll from decorative transforms */
@@ -286,12 +287,25 @@
   .h-screen-mobile {
     height: 100vh;
     height: 100svh;
+    height: -webkit-fill-available;
     height: 100dvh;
   }
 
   .touch-target {
     min-width: var(--touch-min);
     min-height: var(--touch-min);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 
   .safe-pad-x {

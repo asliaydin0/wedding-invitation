@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { weddingConfig } from "@/config";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -10,16 +11,19 @@ type Props = {
   className?: string;
   sizes?: string;
   priority?: boolean;
-  /** Extra class on the fallback surface */
   fallbackClassName?: string;
+  /** Monogram shown when image fails — defaults to couple initials from config */
+  fallbackMonogram?: string;
 };
 
 function ImageFallback({
   alt,
   className,
+  monogram,
 }: {
   alt: string;
   className?: string;
+  monogram: string;
 }) {
   return (
     <div
@@ -31,8 +35,8 @@ function ImageFallback({
       )}
     >
       <div className="pointer-events-none absolute inset-3 border border-brown-800/10" />
-      <span className="font-script text-2xl text-brown-800/35 sm:text-3xl">
-        L &amp; G
+      <span className="font-script text-2xl text-brown-800/40 sm:text-3xl">
+        {monogram}
       </span>
     </div>
   );
@@ -49,13 +53,23 @@ export function InvitationImage({
   sizes = "100vw",
   priority = false,
   fallbackClassName,
+  fallbackMonogram,
 }: Props) {
   const [failed, setFailed] = useState(false);
   const validSrc = typeof src === "string" && src.trim().length > 0;
   const isSvg = validSrc && src.toLowerCase().endsWith(".svg");
+  const monogram =
+    fallbackMonogram ??
+    `${weddingConfig.brideName.charAt(0)} & ${weddingConfig.groomName.charAt(0)}`;
 
   if (!validSrc || failed) {
-    return <ImageFallback alt={alt} className={fallbackClassName} />;
+    return (
+      <ImageFallback
+        alt={alt}
+        className={fallbackClassName}
+        monogram={monogram}
+      />
+    );
   }
 
   return (

@@ -20,6 +20,7 @@ type Props = {
 
 /**
  * Orchestrates opening experience from config-driven `data`.
+ * Music control only after open — never above the seal dialog.
  */
 export function InvitationExperience({ children, data }: Props) {
   const { phase, isOpen, isSealed, isOpening } = useInvitation();
@@ -43,7 +44,7 @@ export function InvitationExperience({ children, data }: Props) {
         {!isOpen ? <SealGate key="seal-gate" data={data.opening} /> : null}
       </AnimatePresence>
 
-      {data.music.enabled ? <MusicControl /> : null}
+      {data.music.enabled && isOpen ? <MusicControl /> : null}
 
       <motion.div
         variants={variants}
@@ -55,7 +56,8 @@ export function InvitationExperience({ children, data }: Props) {
         }}
         aria-hidden={phase === "sealed"}
       >
-        {children}
+        {/* Defer heavy tree until opening starts — fewer sealed-phase timers */}
+        {phase !== "sealed" ? children : null}
       </motion.div>
     </>
   );
