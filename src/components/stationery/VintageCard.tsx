@@ -17,17 +17,18 @@ type Props = {
 };
 
 const padMap: Record<Padding, string> = {
-  sm: "px-5 py-6 sm:px-6 sm:py-7",
-  md: "px-6 py-8 sm:px-8 sm:py-10",
-  lg: "px-7 py-10 sm:px-10 sm:py-12",
+  sm: "px-4 py-5 sm:px-6 sm:py-7",
+  md: "px-4 py-6 sm:px-8 sm:py-10",
+  lg: "px-5 py-8 sm:px-10 sm:py-12",
 };
 
 const rotateClass: Record<Rotate, string> = {
   none: "",
-  "subtle-left": "-rotate-[0.6deg]",
-  "subtle-right": "rotate-[0.6deg]",
-  left: "-rotate-1",
-  right: "rotate-1",
+  /* Soft tilt only from sm up — avoids horizontal clip on 320px */
+  "subtle-left": "sm:-rotate-[0.6deg]",
+  "subtle-right": "sm:rotate-[0.6deg]",
+  left: "sm:-rotate-1",
+  right: "sm:rotate-1",
 };
 
 /**

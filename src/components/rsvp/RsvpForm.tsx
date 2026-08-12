@@ -139,7 +139,7 @@ export function RsvpForm({ className }: Props) {
                   if (value === "attending" && guests < 1) setGuests(1);
                 }}
                 className={cn(
-                  "flex items-center gap-2.5 rounded-sm border px-3 py-3 text-left font-serif text-sm transition",
+                  "flex min-h-11 items-center gap-2.5 rounded-sm border px-3 py-3 text-left font-serif text-sm transition",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy-500/40",
                   selected
                     ? "border-burgundy-500/45 bg-burgundy-500/8 text-ink"
@@ -182,7 +182,7 @@ export function RsvpForm({ className }: Props) {
           aria-describedby={errors.guests ? `${formId}-guests-error` : undefined}
           onChange={(e) => setGuests(Number(e.target.value))}
           className={cn(
-            "w-full appearance-none border-0 border-b bg-transparent py-2.5 font-serif text-base text-ink outline-none transition",
+            "min-h-11 w-full appearance-none border-0 border-b bg-transparent py-2.5 font-serif text-base text-ink outline-none transition",
             "focus:border-burgundy-500 disabled:cursor-not-allowed disabled:opacity-40",
             errors.guests ? "border-burgundy-500/70" : "border-brown-400/35",
           )}

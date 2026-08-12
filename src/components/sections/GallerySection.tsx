@@ -16,6 +16,7 @@ const masonryPlacement: Record<
   NonNullable<GalleryImage["span"]>,
   string
 > = {
+  /** On 2-col mobile, tall stays single column; wide spans both */
   tall: "row-span-2",
   wide: "col-span-2",
   square: "",
@@ -44,16 +45,16 @@ function GalleryFrame({
     <RevealItem
       variant="scale"
       intensity="subtle"
-      className={cn(masonryPlacement[span])}
+      className={cn("min-w-0", masonryPlacement[span])}
     >
       <button
         type="button"
         onClick={() => onOpen(index)}
         className={cn(
-          "group relative h-full min-h-[9.5rem] w-full overflow-hidden bg-beige-300/25 outline-none",
+          "group relative h-full min-h-[44px] w-full min-w-0 overflow-hidden bg-beige-300/25 outline-none",
           "shadow-soft transition duration-500 hover:shadow-lift",
           "focus-visible:ring-2 focus-visible:ring-gold-400/55 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory-50",
-          edge === "soft" ? "rounded-[0.65rem]" : "rounded-none",
+          edge === "soft" ? "rounded-[0.5rem] sm:rounded-[0.65rem]" : "rounded-none",
         )}
         style={{ aspectRatio: aspect }}
         aria-label={`${image.alt} — büyüt`}
@@ -61,21 +62,15 @@ function GalleryFrame({
         <span
           className={cn(
             "pointer-events-none absolute inset-0 z-[2]",
-            "border-[3px] border-ivory-50/90",
+            "border-[2px] border-ivory-50/90 sm:border-[3px]",
             "shadow-[inset_0_0_0_1px_rgba(92,64,51,0.18)]",
-            edge === "soft" ? "rounded-[0.65rem]" : "rounded-none",
+            edge === "soft" ? "rounded-[0.5rem] sm:rounded-[0.65rem]" : "rounded-none",
           )}
         />
         <span
           className={cn(
-            "pointer-events-none absolute inset-[7px] z-[2] border border-gold-500/25",
-            edge === "soft" ? "rounded-[0.35rem]" : "rounded-none",
-          )}
-        />
-        <span
-          className={cn(
-            "pointer-events-none absolute inset-[11px] z-[2] border border-espresso-950/10",
-            edge === "soft" ? "rounded-[0.2rem]" : "rounded-none",
+            "pointer-events-none absolute inset-[5px] z-[2] border border-gold-500/25 sm:inset-[7px]",
+            edge === "soft" ? "rounded-[0.25rem] sm:rounded-[0.35rem]" : "rounded-none",
           )}
         />
 
@@ -84,7 +79,8 @@ function GalleryFrame({
           alt={image.alt}
           className={cn(
             "transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
-            "group-hover:scale-[1.025] group-active:scale-[1.015]",
+            "group-hover:scale-[1.02] group-active:scale-[1.01]",
+            "md:group-hover:scale-[1.025]",
           )}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 280px"
         />
@@ -108,10 +104,10 @@ export function GallerySection() {
   if (images.length === 0) return null;
 
   return (
-    <Section id="gallery" className="relative overflow-hidden">
+    <Section id="gallery" className="relative overflow-x-clip">
       <FloralAccent preset="gallery" />
 
-      <div className="relative z-[1]">
+      <div className="relative z-[1] min-w-0">
         <Reveal variant="fadeUp" intensity="subtle">
           <SectionHeading
             eyebrow={wedding.copy.galleryEyebrow}
@@ -123,7 +119,7 @@ export function GallerySection() {
         <Stagger
           tone="gallery"
           className={cn(
-            "mt-3 grid auto-rows-[minmax(8.5rem,auto)] grid-cols-2 gap-3",
+            "mt-3 grid min-w-0 auto-rows-[minmax(7.5rem,auto)] grid-cols-2 gap-2",
             "sm:mt-5 sm:auto-rows-[minmax(10.5rem,auto)] sm:gap-4",
             "md:grid-cols-3 md:gap-5",
             "lg:gap-6",

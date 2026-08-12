@@ -54,25 +54,25 @@ function GatePanel({
         <div
           aria-hidden
           className={cn(
-            "pointer-events-none absolute inset-3 border border-gold-400/30 sm:inset-4",
+            "pointer-events-none absolute inset-2.5 border border-gold-400/30 sm:inset-4",
             isLeft ? "border-r-gold-400/15" : "border-l-gold-400/15",
           )}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-4 border border-gold-400/12 sm:inset-5"
+          className="pointer-events-none absolute inset-3.5 border border-gold-400/12 sm:inset-5"
         />
 
         {isLeft ? (
           <>
             <SvgCornerBouquet
               tone="embossed"
-              className="absolute bottom-4 left-0 h-52 w-40 opacity-90 sm:bottom-8 sm:left-2 sm:h-64 sm:w-48"
+              className="absolute bottom-3 left-0 h-40 w-28 opacity-90 sm:bottom-8 sm:left-2 sm:h-64 sm:w-48"
             />
             <SvgSprig
               tone="embossed"
               flip
-              className="absolute right-2 top-10 h-28 w-16 rotate-[-12deg] opacity-50 sm:right-4"
+              className="absolute right-1 top-8 h-20 w-12 rotate-[-12deg] opacity-45 sm:right-4 sm:top-10 sm:h-28 sm:w-16 sm:opacity-50"
             />
           </>
         ) : (
@@ -80,11 +80,11 @@ function GatePanel({
             <SvgCornerBouquet
               tone="embossed"
               flip
-              className="absolute right-0 top-4 h-52 w-40 opacity-90 sm:right-2 sm:top-8 sm:h-64 sm:w-48"
+              className="absolute right-0 top-3 h-40 w-28 opacity-90 sm:right-2 sm:top-8 sm:h-64 sm:w-48"
             />
             <SvgSprig
               tone="embossed"
-              className="absolute bottom-10 left-2 h-28 w-16 rotate-12 opacity-50 sm:left-4"
+              className="absolute bottom-8 left-1 h-20 w-12 rotate-12 opacity-45 sm:bottom-10 sm:left-4 sm:h-28 sm:w-16 sm:opacity-50"
             />
           </>
         )}
@@ -125,7 +125,7 @@ function SealButton({
     >
       <motion.span
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 size-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(196,167,106,0.55)_0%,transparent_68%)] blur-md sm:size-32"
+        className="pointer-events-none absolute left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(196,167,106,0.55)_0%,transparent_68%)] blur-md sm:size-32"
         initial={{ opacity: 0.2, scale: 1 }}
         animate={
           phase === "opening"
@@ -147,7 +147,7 @@ function SealButton({
         onClick={onOpen}
         aria-label={wedding.copy.sealHint}
         className={cn(
-          "group relative flex size-[4.75rem] items-center justify-center rounded-full bg-burgundy-600 text-ivory-50 shadow-seal outline-none sm:size-24",
+          "group relative flex touch-target size-[4.75rem] items-center justify-center rounded-full bg-burgundy-600 text-ivory-50 shadow-seal outline-none sm:size-24",
           "focus-visible:ring-2 focus-visible:ring-gold-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory-100",
           interactive ? "cursor-pointer" : "pointer-events-none",
         )}
@@ -236,14 +236,14 @@ export const SealGate = forwardRef<HTMLDivElement>(function SealGate(_, ref) {
 
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 z-10 size-[min(92vw,32rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(250,247,242,0.55)_0%,rgba(196,167,106,0.28)_35%,transparent_70%)] blur-2xl"
+        className="pointer-events-none absolute left-1/2 top-1/2 z-10 size-[min(88vw,28rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(250,247,242,0.55)_0%,rgba(196,167,106,0.28)_35%,transparent_70%)] blur-2xl sm:size-[min(92vw,32rem)]"
         variants={warmGlowVariants}
         initial="sealed"
         animate={panelPhase}
       />
 
       <div
-        className="relative z-20 h-dvh w-full"
+        className="relative z-20 h-screen-mobile w-full"
         style={{ perspective: reduced ? undefined : "1200px" }}
       >
         <div className="relative h-full w-full" style={{ transformStyle: "preserve-3d" }}>
@@ -273,7 +273,10 @@ export const SealGate = forwardRef<HTMLDivElement>(function SealGate(_, ref) {
 
       {phase === "sealed" ? (
         <motion.p
-          className="pointer-events-none absolute bottom-10 left-1/2 z-40 w-full max-w-xs -translate-x-1/2 px-6 text-center font-serif text-xs tracking-[0.22em] text-ivory-100/55 uppercase"
+          className="pointer-events-none absolute left-1/2 z-40 w-full max-w-xs -translate-x-1/2 px-5 text-center font-serif text-[0.65rem] tracking-[0.2em] text-ivory-100/55 uppercase sm:px-6 sm:text-xs sm:tracking-[0.22em]"
+          style={{
+            bottom: "max(2rem, calc(var(--safe-bottom) + 1.5rem))",
+          }}
           initial={reduced ? false : { opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}

@@ -23,13 +23,16 @@ type Props = {
 };
 
 /**
- * Section-specific botanical layouts — different compositions per chapter.
+ * Section-specific botanical layouts — clipped, mobile-safe sizes.
  */
 export function FloralAccent({ preset, className, tone = "gold" }: Props) {
   return (
     <div
       aria-hidden
-      className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+      className={cn(
+        "pointer-events-none absolute inset-0 overflow-hidden",
+        className,
+      )}
     >
       {preset === "hero" && <HeroFlorals tone={tone} />}
       {preset === "story" && <StoryFlorals tone={tone} />}
@@ -47,31 +50,45 @@ export function FloralAccent({ preset, className, tone = "gold" }: Props) {
 function HeroFlorals({ tone }: { tone: BotanicalTone }) {
   return (
     <>
-      <FloralCorner position="tl" tone={tone} motion="sway" parallax={0.4} appearDelay={0.05} />
-      <FloralCorner position="br" tone={tone} motion="float" parallax={0.35} appearDelay={0.18} />
+      <FloralCorner
+        position="tl"
+        tone={tone}
+        motion="sway"
+        parallax={0.25}
+        appearDelay={0.05}
+        className="h-24 w-16 opacity-90 sm:h-auto sm:w-auto"
+      />
+      <FloralCorner
+        position="br"
+        tone={tone}
+        motion="float"
+        parallax={0.22}
+        appearDelay={0.18}
+        className="h-24 w-16 opacity-90 sm:h-auto sm:w-auto"
+      />
       <FloralMotif
         motif="sprig"
         tone={tone}
         motion="drift"
-        parallax={0.25}
+        parallax={0.15}
         appearDelay={0.28}
-        className="absolute right-1 top-[20%] h-28 w-16 rotate-[22deg] opacity-80 sm:right-3 sm:h-36 sm:w-20"
+        className="absolute right-0 top-[20%] h-20 w-12 rotate-[18deg] opacity-70 sm:right-3 sm:h-36 sm:w-20 sm:rotate-[22deg] sm:opacity-80"
       />
       <FloralMotif
         motif="sprig"
         tone={tone}
         flip
         motion="sway"
-        parallax={0.25}
+        parallax={0.15}
         appearDelay={0.34}
-        className="absolute bottom-[24%] left-1 h-28 w-16 -rotate-[18deg] opacity-80 sm:left-3 sm:h-36 sm:w-20"
+        className="absolute bottom-[24%] left-0 h-20 w-12 -rotate-[14deg] opacity-70 sm:left-3 sm:h-36 sm:w-20 sm:-rotate-[18deg] sm:opacity-80"
       />
       <FloralMotif
         motif="bloom"
         tone="burgundy"
         motion="float"
         appearDelay={0.4}
-        className="absolute right-[18%] top-[38%] h-10 w-8 opacity-70"
+        className="absolute right-[16%] top-[38%] hidden h-10 w-8 opacity-70 sm:block"
       />
     </>
   );
@@ -84,24 +101,24 @@ function StoryFlorals({ tone }: { tone: BotanicalTone }) {
         motif="rose"
         tone={tone}
         motion="float"
-        parallax={0.3}
-        className="absolute -right-1 top-8 h-20 w-16 opacity-75 sm:right-2"
+        parallax={0.15}
+        className="absolute right-0 top-8 h-16 w-12 opacity-70 sm:right-2 sm:h-20 sm:w-16 sm:opacity-75"
       />
       <FloralMotif
         motif="leaf"
         tone={tone}
         flip
         motion="sway"
-        parallax={0.2}
+        parallax={0.12}
         appearDelay={0.12}
-        className="absolute bottom-10 left-0 h-16 w-11 opacity-60"
+        className="absolute bottom-10 left-0 h-14 w-9 opacity-55 sm:h-16 sm:w-11 sm:opacity-60"
       />
       <FloralMotif
         motif="bloom"
         tone="burgundy"
         motion="none"
         appearDelay={0.2}
-        className="absolute right-8 bottom-24 h-9 w-7 opacity-55"
+        className="absolute right-6 bottom-24 hidden h-9 w-7 opacity-55 sm:block"
       />
     </>
   );
@@ -114,17 +131,17 @@ function SideBranchFlorals({ tone }: { tone: BotanicalTone }) {
         motif="branch"
         tone={tone}
         motion="drift"
-        parallax={0.2}
-        className="absolute -left-6 top-6 h-16 w-36 -rotate-6 opacity-55 sm:-left-2"
+        parallax={0.12}
+        className="absolute -left-4 top-6 h-12 w-28 -rotate-6 opacity-45 sm:-left-2 sm:h-16 sm:w-36 sm:opacity-55"
       />
       <FloralMotif
         motif="branch"
         tone={tone}
         flip
         motion="drift"
-        parallax={0.2}
+        parallax={0.12}
         appearDelay={0.15}
-        className="absolute -right-6 bottom-8 h-16 w-36 rotate-6 opacity-55 sm:-right-2"
+        className="absolute -right-4 bottom-8 h-12 w-28 rotate-6 opacity-45 sm:-right-2 sm:h-16 sm:w-36 sm:opacity-55"
       />
     </>
   );
@@ -141,9 +158,9 @@ function BloomCorners({ tone }: { tone: BotanicalTone }) {
           tone={tone}
           variant="sprig"
           motion="sway"
-          parallax={0.25}
+          parallax={0.15}
           appearDelay={i * 0.12}
-          className="h-28 w-20 opacity-70 sm:h-36 sm:w-28"
+          className="h-24 w-16 opacity-65 sm:h-36 sm:w-28 sm:opacity-70"
         />
       ))}
       <FloralMotif
@@ -151,7 +168,7 @@ function BloomCorners({ tone }: { tone: BotanicalTone }) {
         tone="burgundy"
         motion="float"
         appearDelay={0.2}
-        className="absolute left-1/2 top-4 h-12 w-10 -translate-x-1/2 opacity-50"
+        className="absolute left-1/2 top-4 h-10 w-8 -translate-x-1/2 opacity-45 sm:h-12 sm:w-10 sm:opacity-50"
       />
     </>
   );
@@ -164,24 +181,24 @@ function MapFlorals({ tone }: { tone: BotanicalTone }) {
         motif="sprig"
         tone={tone}
         motion="sway"
-        parallax={0.2}
-        className="absolute -left-2 top-2 h-24 w-14 opacity-60"
+        parallax={0.12}
+        className="absolute left-0 top-2 h-20 w-12 opacity-55 sm:-left-2 sm:h-24 sm:w-14 sm:opacity-60"
       />
       <FloralMotif
         motif="sprig"
         tone={tone}
         flip
         motion="float"
-        parallax={0.2}
+        parallax={0.12}
         appearDelay={0.1}
-        className="absolute -right-2 bottom-2 h-24 w-14 opacity-60"
+        className="absolute right-0 bottom-2 h-20 w-12 opacity-55 sm:-right-2 sm:h-24 sm:w-14 sm:opacity-60"
       />
       <FloralMotif
         motif="leaf"
         tone={tone}
         motion="none"
         appearDelay={0.18}
-        className="absolute right-10 top-16 h-12 w-8 opacity-45"
+        className="absolute right-8 top-16 hidden h-12 w-8 opacity-45 sm:block"
       />
     </>
   );
@@ -194,7 +211,7 @@ function SparseFlorals({ tone }: { tone: BotanicalTone }) {
         motif="bloom"
         tone={tone}
         motion="float"
-        className="absolute left-4 top-8 h-10 w-8 opacity-50"
+        className="absolute left-3 top-8 h-8 w-6 opacity-45 sm:left-4 sm:h-10 sm:w-8 sm:opacity-50"
       />
       <FloralMotif
         motif="bloom"
@@ -202,7 +219,7 @@ function SparseFlorals({ tone }: { tone: BotanicalTone }) {
         flip
         motion="float"
         appearDelay={0.15}
-        className="absolute right-4 bottom-10 h-10 w-8 opacity-50"
+        className="absolute right-3 bottom-10 h-8 w-6 opacity-45 sm:right-4 sm:h-10 sm:w-8 sm:opacity-50"
       />
     </>
   );
@@ -216,16 +233,16 @@ function GalleryFlorals({ tone }: { tone: BotanicalTone }) {
         tone={tone}
         variant="cluster"
         motion="drift"
-        parallax={0.3}
-        className="h-32 w-24 opacity-55 sm:h-40 sm:w-32"
+        parallax={0.15}
+        className="h-24 w-16 opacity-50 sm:h-40 sm:w-32 sm:opacity-55"
       />
       <FloralMotif
         motif="rose"
         tone="burgundy"
         motion="sway"
-        parallax={0.2}
+        parallax={0.12}
         appearDelay={0.12}
-        className="absolute bottom-6 right-2 h-16 w-14 opacity-60"
+        className="absolute bottom-4 right-1 h-12 w-10 opacity-55 sm:bottom-6 sm:right-2 sm:h-16 sm:w-14 sm:opacity-60"
       />
     </>
   );
@@ -238,24 +255,24 @@ function RsvpFlorals({ tone }: { tone: BotanicalTone }) {
         motif="sprig"
         tone={tone}
         motion="sway"
-        parallax={0.15}
-        className="absolute -left-3 -top-2 z-[3] h-24 w-14 opacity-65"
+        parallax={0.1}
+        className="absolute left-0 top-0 z-[3] h-20 w-12 opacity-55 sm:-left-3 sm:-top-2 sm:h-24 sm:w-14 sm:opacity-65"
       />
       <FloralMotif
         motif="sprig"
         tone={tone}
         flip
         motion="float"
-        parallax={0.15}
+        parallax={0.1}
         appearDelay={0.1}
-        className="absolute -bottom-2 -right-3 z-[3] h-24 w-14 opacity-65"
+        className="absolute bottom-0 right-0 z-[3] h-20 w-12 opacity-55 sm:-bottom-2 sm:-right-3 sm:h-24 sm:w-14 sm:opacity-65"
       />
       <FloralMotif
         motif="bloom"
         tone="burgundy"
         motion="none"
         appearDelay={0.2}
-        className="absolute right-6 top-10 h-8 w-6 opacity-45"
+        className="absolute right-5 top-10 hidden h-8 w-6 opacity-45 sm:block"
       />
     </>
   );
@@ -264,14 +281,27 @@ function RsvpFlorals({ tone }: { tone: BotanicalTone }) {
 function FinaleFlorals({ tone }: { tone: BotanicalTone }) {
   return (
     <>
-      <FloralCorner position="tl" tone={tone} motion="sway" parallax={0.35} className="opacity-70" />
-      <FloralCorner position="br" tone={tone} motion="float" parallax={0.35} appearDelay={0.15} className="opacity-70" />
+      <FloralCorner
+        position="tl"
+        tone={tone}
+        motion="sway"
+        parallax={0.2}
+        className="h-24 w-16 opacity-65 sm:h-auto sm:w-auto sm:opacity-70"
+      />
+      <FloralCorner
+        position="br"
+        tone={tone}
+        motion="float"
+        parallax={0.2}
+        appearDelay={0.15}
+        className="h-24 w-16 opacity-65 sm:h-auto sm:w-auto sm:opacity-70"
+      />
       <FloralMotif
         motif="rose"
         tone="burgundy"
         motion="float"
         appearDelay={0.25}
-        className="absolute left-[12%] bottom-[30%] h-14 w-12 opacity-55"
+        className="absolute bottom-[28%] left-[8%] h-12 w-10 opacity-50 sm:left-[12%] sm:h-14 sm:w-12 sm:opacity-55"
       />
       <FloralMotif
         motif="rose"
@@ -279,7 +309,7 @@ function FinaleFlorals({ tone }: { tone: BotanicalTone }) {
         flip
         motion="sway"
         appearDelay={0.3}
-        className="absolute right-[10%] top-[28%] h-14 w-12 opacity-55"
+        className="absolute right-[8%] top-[26%] h-12 w-10 opacity-50 sm:right-[10%] sm:h-14 sm:w-12 sm:opacity-55"
       />
     </>
   );

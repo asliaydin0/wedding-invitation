@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, type ReactNode } from "react";
+import { useFineFloralMotion } from "@/hooks/useFineFloralMotion";
 import { useMotionPreferences } from "@/hooks/useMotionPreferences";
 import { cn } from "@/lib/utils";
 
@@ -11,19 +12,21 @@ type Props = {
   /**
    * Parallax strength 0–1.
    * Keep ≤ 0.35 for premium subtlety (maps to ~±12px at 1).
+   * Disabled on mobile / reduced-motion.
    */
   intensity?: number;
 };
 
 /**
  * Subtle scroll parallax — transform only (y), GPU-friendly.
- * Disabled under prefers-reduced-motion.
+ * Off on mobile (&lt;768) and prefers-reduced-motion.
  */
 export function Parallax({ children, className, intensity = 0.2 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const { reduced } = useMotionPreferences();
+  const fine = useFineFloralMotion();
   const clamped = Math.min(Math.max(intensity, 0), 1);
-  const travel = clamped * 18;
+  const travel = clamped * 14;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -32,7 +35,7 @@ export function Parallax({ children, className, intensity = 0.2 }: Props) {
 
   const y = useTransform(scrollYProgress, [0, 1], [travel, -travel]);
 
-  if (reduced || clamped === 0) {
+  if (reduced || !fine || clamped === 0) {
     return (
       <div ref={ref} className={className}>
         {children}

@@ -4,9 +4,9 @@ type Variant = "burgundy" | "paper" | "outline" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const sizeClass: Record<Size, string> = {
-  sm: "px-5 py-2 text-[0.7rem] tracking-[0.18em]",
-  md: "px-8 py-3 text-sm tracking-[0.2em]",
-  lg: "px-10 py-3.5 text-sm tracking-[0.22em]",
+  sm: "min-h-11 px-5 py-2.5 text-[0.7rem] tracking-[0.18em]",
+  md: "min-h-11 px-8 py-3 text-sm tracking-[0.2em]",
+  lg: "min-h-12 px-10 py-3.5 text-sm tracking-[0.22em]",
 };
 
 function variantClass(variant: Variant) {

@@ -75,12 +75,18 @@ export function InvitationSection({
   );
 
   const pad = compact
-    ? "px-5 py-12 sm:px-6 md:px-8 md:py-14"
-    : "px-5 py-16 sm:px-6 md:px-8 md:py-20";
+    ? "px-4 py-11 sm:px-6 md:px-8 md:py-14"
+    : "px-4 py-14 sm:px-6 sm:py-16 md:px-8 md:py-20";
 
   if (surface === "paper") {
     return (
-      <section id={id} className={cn("relative mx-auto w-full max-w-invitation overflow-hidden", className)}>
+      <section
+        id={id}
+        className={cn(
+          "relative mx-auto w-full max-w-invitation overflow-x-clip",
+          className,
+        )}
+      >
         <PaperTexture tone="ivory" className={cn(pad, "text-ink")}>
           {inner}
         </PaperTexture>
@@ -92,7 +98,7 @@ export function InvitationSection({
     <section
       id={id}
       className={cn(
-        "relative mx-auto w-full max-w-invitation overflow-hidden",
+        "relative mx-auto w-full max-w-invitation overflow-x-clip",
         pad,
         surface === "atmosphere" && "bg-atmosphere text-ink-on-dark",
         surface === "transparent" && "text-ink-on-dark",

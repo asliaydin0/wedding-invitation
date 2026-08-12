@@ -18,7 +18,7 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "relative mx-auto w-full max-w-invitation px-5 py-16 sm:px-6 md:px-8 md:py-20",
+        "relative mx-auto w-full max-w-invitation overflow-x-clip px-4 py-14 sm:px-6 sm:py-16 md:px-8 md:py-20",
         tone === "dark" && "bg-atmosphere text-ink-on-dark",
         tone === "paper" && "bg-paper text-ink",
         className,

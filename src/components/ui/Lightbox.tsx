@@ -64,7 +64,13 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
     <AnimatePresence>
       {open && current ? (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-espresso-950/88 p-4 backdrop-blur-[6px] sm:p-8"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-x-clip bg-espresso-950/88 backdrop-blur-[6px]"
+          style={{
+            paddingTop: "max(1rem, var(--safe-top))",
+            paddingBottom: "max(1rem, var(--safe-bottom))",
+            paddingLeft: "max(0.75rem, var(--safe-left))",
+            paddingRight: "max(0.75rem, var(--safe-right))",
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -77,7 +83,11 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
           <button
             type="button"
             aria-label="Kapat"
-            className="absolute right-3 top-3 z-20 flex size-11 items-center justify-center rounded-full border border-ivory-100/20 bg-espresso-950/40 text-ivory-100/85 transition hover:bg-ivory-100/10 sm:right-5 sm:top-5"
+            className="absolute z-20 flex touch-target size-11 items-center justify-center rounded-full border border-ivory-100/20 bg-espresso-950/40 text-ivory-100/85 transition hover:bg-ivory-100/10"
+            style={{
+              top: "max(0.75rem, calc(var(--safe-top) + 0.5rem))",
+              right: "max(0.75rem, calc(var(--safe-right) + 0.5rem))",
+            }}
             onClick={onClose}
           >
             <X size={18} strokeWidth={1.5} />
@@ -88,7 +98,7 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
               <button
                 type="button"
                 aria-label="Önceki"
-                className="absolute left-2 z-20 flex size-11 items-center justify-center rounded-full border border-ivory-100/15 bg-espresso-950/35 text-ivory-100/75 transition hover:bg-ivory-100/10 sm:left-5"
+                className="absolute left-1 z-20 flex touch-target size-11 items-center justify-center rounded-full border border-ivory-100/15 bg-espresso-950/35 text-ivory-100/75 transition hover:bg-ivory-100/10 sm:left-5"
                 onClick={(e) => {
                   e.stopPropagation();
                   onPrev();
@@ -100,7 +110,7 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
               <button
                 type="button"
                 aria-label="Sonraki"
-                className="absolute right-2 z-20 flex size-11 items-center justify-center rounded-full border border-ivory-100/15 bg-espresso-950/35 text-ivory-100/75 transition hover:bg-ivory-100/10 sm:right-5"
+                className="absolute right-1 z-20 flex touch-target size-11 items-center justify-center rounded-full border border-ivory-100/15 bg-espresso-950/35 text-ivory-100/75 transition hover:bg-ivory-100/10 sm:right-5"
                 onClick={(e) => {
                   e.stopPropagation();
                   onNext();
@@ -114,7 +124,7 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
           <motion.div
             key={current.src + String(index)}
             className={cn(
-              "relative w-full max-w-2xl overflow-hidden shadow-lift",
+              "relative mx-auto w-full max-w-lg overflow-hidden shadow-lift sm:max-w-2xl",
               "border border-ivory-100/15 bg-espresso-900/40",
               "ring-1 ring-gold-400/15",
             )}
@@ -125,16 +135,15 @@ export function Lightbox({ images, index, onClose, onPrev, onNext }: Props) {
             onClick={(e) => e.stopPropagation()}
             {...swipe}
           >
-            <div className="relative mx-auto aspect-[3/4] max-h-[78dvh] w-full sm:aspect-[4/5]">
+            <div className="relative mx-auto aspect-[3/4] max-h-[min(72dvh,72svh)] w-full sm:aspect-[4/5] sm:max-h-[78dvh]">
               <InvitationImage
                 src={current.src}
                 alt={current.alt}
                 sizes="(max-width: 672px) 100vw, 672px"
                 priority
               />
-              {/* Vintage inner frame */}
-              <span className="pointer-events-none absolute inset-3 border border-ivory-50/20 sm:inset-4" />
-              <span className="pointer-events-none absolute inset-4 border border-gold-400/15 sm:inset-5" />
+              <span className="pointer-events-none absolute inset-2 border border-ivory-50/20 sm:inset-4" />
+              <span className="pointer-events-none absolute inset-3 border border-gold-400/15 sm:inset-5" />
             </div>
 
             <div className="flex items-center justify-between gap-3 border-t border-ivory-100/10 px-4 py-3 sm:px-5">

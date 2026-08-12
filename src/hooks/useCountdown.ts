@@ -3,12 +3,23 @@
 import { useEffect, useState } from "react";
 import { formatCountdown, type CountdownValue } from "@/lib/utils";
 
+const EMPTY: CountdownValue = {
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+  isPast: false,
+};
+
 /**
  * Live countdown to an ISO datetime from config.
- * Ticks once per second, aligned to the next whole second when possible.
+ * Starts after mount so SSR HTML matches the first client paint (no hydration mismatch).
  */
-export function useCountdown(targetISO: string): CountdownValue {
-  const [time, setTime] = useState(() => formatCountdown(targetISO));
+export function useCountdown(targetISO: string): CountdownValue & {
+  ready: boolean;
+} {
+  const [time, setTime] = useState<CountdownValue>(EMPTY);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     let intervalId = 0;
@@ -17,8 +28,8 @@ export function useCountdown(targetISO: string): CountdownValue {
     const tick = () => setTime(formatCountdown(targetISO));
 
     tick();
+    setReady(true);
 
-    // Align first interval to the clock second for smoother updates
     const msToNextSecond = 1000 - (Date.now() % 1000);
     timeoutId = window.setTimeout(() => {
       tick();
@@ -31,5 +42,5 @@ export function useCountdown(targetISO: string): CountdownValue {
     };
   }, [targetISO]);
 
-  return time;
+  return { ...time, ready };
 }

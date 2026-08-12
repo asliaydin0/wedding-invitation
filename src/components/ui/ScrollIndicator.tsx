@@ -10,7 +10,7 @@ type Props = {
   label?: string;
 };
 
-/** Minimal scroll affordance — soft drift, never bounce */
+/** Minimal scroll affordance — soft drift, 44px+ touch target */
 export function ScrollIndicator({
   href = "#story",
   className,
@@ -23,11 +23,11 @@ export function ScrollIndicator({
       href={href}
       aria-label={label}
       className={cn(
-        "group inline-flex flex-col items-center gap-2 text-ivory-100/45 transition hover:text-ivory-100/70",
+        "group inline-flex min-h-11 min-w-11 flex-col items-center justify-center gap-1.5 px-3 text-ivory-100/45 transition hover:text-ivory-100/70",
         className,
       )}
     >
-      <span className="font-serif text-[0.65rem] tracking-[0.28em] uppercase">
+      <span className="font-serif text-[0.62rem] tracking-[0.28em] uppercase sm:text-[0.65rem]">
         Scroll
       </span>
       <motion.span
@@ -42,7 +42,7 @@ export function ScrollIndicator({
                 ease: "easeInOut",
               }
         }
-        className="flex size-8 items-center justify-center rounded-full border border-ivory-100/20"
+        className="flex size-9 items-center justify-center rounded-full border border-ivory-100/20 sm:size-8"
       >
         <ChevronDown size={14} strokeWidth={1.25} />
       </motion.span>

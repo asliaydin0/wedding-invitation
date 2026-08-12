@@ -19,7 +19,7 @@ export function StorySection() {
         <Reveal
           variant="clip"
           intensity="subtle"
-          className="relative mx-auto w-full max-w-[16rem]"
+          className="relative mx-auto w-full max-w-[min(100%,16rem)] overflow-visible"
         >
           <Parallax intensity={0.18}>
             <OrnamentalFrame tone="antique" padding="sm" className="bg-ivory-100/90">
@@ -39,7 +39,7 @@ export function StorySection() {
             motion="sway"
             appearDelay={0.15}
             placement="inline"
-            className="absolute -left-6 -top-4 h-28 w-16 -rotate-12 opacity-75"
+            className="absolute -left-3 -top-3 h-20 w-12 -rotate-12 opacity-70 sm:-left-6 sm:-top-4 sm:h-28 sm:w-16 sm:opacity-75"
           />
           <FloralDecoration
             motif="rose"
@@ -48,7 +48,7 @@ export function StorySection() {
             motion="float"
             appearDelay={0.25}
             placement="inline"
-            className="absolute -bottom-3 -right-4 h-16 w-14 opacity-80"
+            className="absolute -bottom-2 -right-2 h-12 w-11 opacity-75 sm:-bottom-3 sm:-right-4 sm:h-16 sm:w-14 sm:opacity-80"
           />
         </Reveal>
 
@@ -56,7 +56,7 @@ export function StorySection() {
           variant="fadeUp"
           intensity="subtle"
           delay={0.08}
-          className="space-y-5 text-center"
+          className="space-y-5 px-1 text-center"
         >
           {wedding.story.paragraphs.map((p) => (
             <Typography
@@ -70,7 +70,7 @@ export function StorySection() {
           ))}
           <Typography
             variant="script"
-            className="pt-2 text-3xl text-burgundy-400 sm:text-4xl"
+            className="pt-2 text-[clamp(1.75rem,8vw,2.25rem)] text-burgundy-400 sm:text-4xl"
           >
             {wedding.couple.partnerOne} & {wedding.couple.partnerTwo}
           </Typography>

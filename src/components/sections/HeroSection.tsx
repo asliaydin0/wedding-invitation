@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Full-viewport hero — revealed after invitation opens.
- * Stagger: backdrop → florals → names → date → message → scroll hint
+ * Mobile-first: safe areas, fluid names, no overflow.
  */
 export function HeroSection() {
   const { isOpen } = useInvitation();
@@ -32,7 +32,7 @@ export function HeroSection() {
     <section
       id="hero"
       aria-label="Karşılama"
-      className="relative flex min-h-dvh flex-col overflow-hidden"
+      className="relative flex min-h-screen-mobile flex-col overflow-x-clip overflow-y-hidden"
     >
       <motion.div
         className="absolute inset-0 will-change-[opacity]"
@@ -66,7 +66,7 @@ export function HeroSection() {
       </motion.div>
 
       <motion.div
-        className="relative z-10 flex min-h-dvh flex-1 flex-col will-change-[opacity,transform]"
+        className="relative z-10 flex min-h-screen-mobile flex-1 flex-col will-change-[opacity,transform]"
         variants={reduced ? undefined : heroRoot}
         initial={reduced ? false : "hidden"}
         animate={show ? "visible" : "hidden"}
@@ -75,22 +75,29 @@ export function HeroSection() {
 
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[42%] z-0 size-[min(88vw,22rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(250,247,242,0.14)_0%,transparent_70%)] blur-2xl"
+          className="pointer-events-none absolute left-1/2 top-[42%] z-0 size-[min(78vw,20rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(250,247,242,0.14)_0%,transparent_70%)] blur-2xl sm:size-[min(88vw,22rem)]"
         />
 
-        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-24 pt-16 text-center sm:px-8">
+        <div
+          className={cn(
+            "relative z-10 flex flex-1 flex-col items-center justify-center text-center",
+            "px-4 sm:px-8",
+            "pt-[max(3.5rem,calc(var(--safe-top)+2.5rem))]",
+            "pb-[max(5.5rem,calc(var(--safe-bottom)+5rem))]",
+          )}
+        >
           <motion.div variants={reduced ? undefined : heroMeta}>
-            <Typography variant="eyebrow" tone="gold" className="mb-8 sm:mb-10">
+            <Typography variant="eyebrow" tone="gold" className="mb-6 sm:mb-10">
               {wedding.copy.heroEyebrow}
             </Typography>
           </motion.div>
 
-          <h1 className="flex w-full max-w-[20rem] flex-col items-center sm:max-w-md">
+          <h1 className="flex w-full max-w-[min(100%,20rem)] flex-col items-center px-1 sm:max-w-md">
             <motion.span
               variants={reduced ? undefined : heroName}
               className={cn(
-                "font-script block w-full text-burgundy-400",
-                "text-[clamp(2.75rem,14vw,4.5rem)] leading-[1.05] tracking-wide",
+                "font-script block w-full max-w-full break-words text-burgundy-400",
+                "text-[clamp(2.35rem,11.5vw,4.5rem)] leading-[1.08] tracking-wide",
               )}
             >
               {wedding.couple.partnerOne}
@@ -98,7 +105,7 @@ export function HeroSection() {
 
             <motion.span
               variants={reduced ? undefined : heroAmpersand}
-              className="my-1 font-serif text-sm tracking-[0.35em] text-gold-400/80 sm:my-2 sm:text-base"
+              className="my-0.5 font-serif text-sm tracking-[0.35em] text-gold-400/80 sm:my-2 sm:text-base"
             >
               &
             </motion.span>
@@ -106,8 +113,8 @@ export function HeroSection() {
             <motion.span
               variants={reduced ? undefined : heroName}
               className={cn(
-                "font-script block w-full text-burgundy-400",
-                "text-[clamp(2.75rem,14vw,4.5rem)] leading-[1.05] tracking-wide",
+                "font-script block w-full max-w-full break-words text-burgundy-400",
+                "text-[clamp(2.35rem,11.5vw,4.5rem)] leading-[1.08] tracking-wide",
               )}
             >
               {wedding.couple.partnerTwo}
@@ -116,13 +123,13 @@ export function HeroSection() {
 
           <motion.div
             variants={reduced ? undefined : heroMeta}
-            className="mt-8 flex w-full max-w-xs flex-col items-center sm:mt-10"
+            className="mt-7 flex w-full max-w-xs flex-col items-center sm:mt-10"
           >
-            <Divider className="mb-6" />
+            <Divider className="mb-5 sm:mb-6" />
             <Typography
               variant="caption"
               tone="onDarkMuted"
-              className="text-ivory-100/70"
+              className="px-2 text-ivory-100/70"
             >
               {wedding.event.dateLabel}
             </Typography>
@@ -130,7 +137,7 @@ export function HeroSection() {
 
           <motion.p
             variants={reduced ? undefined : heroMeta}
-            className="mt-7 max-w-[17.5rem] font-serif text-[0.95rem] leading-relaxed text-ivory-100/65 italic sm:mt-8 sm:max-w-sm sm:text-base"
+            className="mt-6 max-w-[16.5rem] px-1 font-serif text-[0.9rem] leading-relaxed text-ivory-100/65 italic sm:mt-8 sm:max-w-sm sm:text-base"
           >
             “{wedding.copy.heroBody}”
           </motion.p>
@@ -138,7 +145,10 @@ export function HeroSection() {
 
         <motion.div
           variants={reduced ? undefined : heroScrollHint}
-          className="absolute inset-x-0 bottom-7 z-20 flex justify-center sm:bottom-9"
+          className="absolute inset-x-0 z-20 flex justify-center safe-inset-bottom sm:bottom-9"
+          style={{
+            bottom: "max(1.5rem, calc(var(--safe-bottom) + 1.25rem))",
+          }}
         >
           {show ? <ScrollIndicator href="#story" /> : null}
         </motion.div>

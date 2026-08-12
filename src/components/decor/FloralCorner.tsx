@@ -55,7 +55,7 @@ export function FloralCorner({
       parallax={parallax}
       appearDelay={appearDelay}
       className={cn(
-        "absolute z-[2] h-36 w-28 sm:h-48 sm:w-36",
+        "absolute z-[2] h-28 w-20 sm:h-48 sm:w-36",
         positionClass[position],
         orientClass[position],
         className,

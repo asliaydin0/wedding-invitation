@@ -37,14 +37,13 @@ function Visualizer({ active }: { active: boolean }) {
 }
 
 /**
- * Premium circular music control — fixed bottom-right.
- * Never autoplays; only reacts to user gestures (button / wax seal unlock).
+ * Premium circular music control — fixed bottom-right with iOS safe-area.
+ * Touch target ≥ 44px.
  */
 export function MusicControl({ className }: Props) {
   const { isPlaying, isAvailable, toggle } = useAudio();
   const reduced = useReducedMotion() ?? false;
 
-  // Keep visible until a load is proven broken (idle/ready both show)
   if (!isAvailable) return null;
 
   return (
@@ -57,7 +56,7 @@ export function MusicControl({ className }: Props) {
       aria-label={isPlaying ? "Müziği durdur" : "Müziği çal"}
       aria-pressed={isPlaying}
       className={cn(
-        "group fixed bottom-6 right-5 z-[80] flex size-12 items-center justify-center rounded-full",
+        "group fixed z-[80] flex touch-target size-12 items-center justify-center rounded-full",
         "border border-gold-500/45 bg-burgundy-700 text-ivory-100",
         "shadow-[0_10px_28px_rgb(21_17_14/0.4),inset_0_1px_0_rgb(255_255_255/0.12)]",
         "backdrop-blur-sm outline-none transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
@@ -66,6 +65,10 @@ export function MusicControl({ className }: Props) {
         !isPlaying && !reduced && "animate-[seal-breathe_3.2s_ease-in-out_infinite]",
         className,
       )}
+      style={{
+        bottom: "max(1.25rem, calc(var(--safe-bottom) + 0.85rem))",
+        right: "max(1.05rem, calc(var(--safe-right) + 0.65rem))",
+      }}
     >
       <span
         aria-hidden

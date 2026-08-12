@@ -10,18 +10,18 @@ import { wedding } from "@/content/wedding";
 export function FooterSection() {
   return (
     <footer id="finale" aria-label="Kapanış mesajı">
-      <Section className="relative overflow-hidden pb-28 pt-10 text-center">
+      <Section className="relative overflow-x-clip pb-[max(7rem,calc(var(--safe-bottom)+5.5rem))] pt-10 text-center">
         <FloralAccent preset="finale" />
 
         <Reveal variant="fade" intensity="subtle">
-          <div className="relative z-[1] px-2 py-12">
+          <div className="relative z-[1] px-1 py-10 sm:px-2 sm:py-12">
             <Typography variant="eyebrow" tone="gold" className="mb-6">
               {wedding.copy.footerEyebrow}
             </Typography>
 
             <Typography
               variant="script"
-              className="mb-2 text-[clamp(2.4rem,12vw,3.5rem)] text-burgundy-400"
+              className="mb-2 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400"
             >
               {wedding.couple.partnerOne}
             </Typography>
@@ -30,7 +30,7 @@ export function FooterSection() {
             </Typography>
             <Typography
               variant="script"
-              className="mb-8 text-[clamp(2.4rem,12vw,3.5rem)] text-burgundy-400"
+              className="mb-8 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400"
             >
               {wedding.couple.partnerTwo}
             </Typography>

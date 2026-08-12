@@ -15,7 +15,7 @@ import { VenueSection } from "@/components/sections/VenueSection";
 
 function OpenedInvitation() {
   return (
-    <Atmosphere className="min-h-dvh" withVignette={false} withGrain={false}>
+    <Atmosphere className="min-h-screen-mobile overflow-x-clip" withVignette={false} withGrain={false}>
       <InvitationShell>
         <HeroSection />
         <StorySection />

@@ -47,7 +47,7 @@ export const viewport: Viewport = {
   themeColor: "#1f1914",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -60,7 +60,7 @@ export default function RootLayout({
       lang="tr"
       className={`${cormorant.variable} ${greatVibes.variable} ${cinzel.variable} ${outfit.variable}`}
     >
-      <body className="min-h-dvh font-sans antialiased">
+      <body className="min-h-screen-mobile overflow-x-clip font-sans antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>

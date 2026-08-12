@@ -109,7 +109,7 @@ export const warmGlowVariants: Variants = {
   },
 };
 
-/** Main invitation content under the gate — opacity + scale only (60fps) */
+/** Main invitation content under the gate — opacity only on small screens via CSS; scale kept tiny */
 export const contentReveal: Variants = {
   sealed: {
     opacity: 0,
@@ -128,6 +128,20 @@ export const contentReveal: Variants = {
     opacity: 1,
     scale: 1,
   },
+};
+
+/** Prefer opacity-only reveal on mobile to avoid transform overflow */
+export const contentRevealMobile: Variants = {
+  sealed: { opacity: 0 },
+  opening: {
+    opacity: 1,
+    transition: {
+      duration: duration.content * 0.85,
+      delay: 0.45,
+      ease: ease.cinematic,
+    },
+  },
+  open: { opacity: 1 },
 };
 
 export const contentRevealReduced: Variants = {

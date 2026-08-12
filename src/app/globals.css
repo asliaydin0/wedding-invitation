@@ -74,6 +74,13 @@
   --max-invitation: 28rem;
   --section-pad-x: 1.25rem;
   --section-pad-y: 4rem;
+
+  /* iOS safe areas + mobile viewport */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --touch-min: 2.75rem; /* 44px */
 }
 
 @theme inline {
@@ -149,6 +156,9 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* Prevent rubber-band horizontal drift on iOS */
+    overflow-x: clip;
+    overscroll-behavior-x: none;
   }
 
   body {
@@ -157,11 +167,31 @@
     font-family: var(--font-sans);
     font-weight: 300;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+    /* Fill mobile browser chrome correctly */
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+
+  /* Avoid accidental horizontal scroll from decorative transforms */
+  #__next,
+  main {
+    overflow-x: clip;
   }
 
   ::selection {
     background-color: color-mix(in srgb, var(--burgundy-500) 40%, transparent);
     color: var(--ivory-50);
+  }
+
+  /* 16px+ inputs prevent iOS Safari zoom-on-focus */
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
   }
 }
 
@@ -182,17 +212,17 @@
     font-family: var(--font-sans);
   }
 
-  /* Type scale — mobile-first */
+  /* Type scale — mobile-first (tuned for 320–414) */
   .text-display-script {
     font-family: var(--font-script);
-    font-size: clamp(2.75rem, 12vw, 4.5rem);
-    line-height: 1.05;
+    font-size: clamp(2.35rem, 11.5vw, 4.5rem);
+    line-height: 1.08;
     letter-spacing: 0.01em;
   }
 
   .text-display-serif {
     font-family: var(--font-serif);
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    font-size: clamp(1.55rem, 5.5vw, 2.5rem);
     font-weight: 500;
     line-height: 1.15;
     letter-spacing: 0.04em;
@@ -200,7 +230,7 @@
 
   .text-heading {
     font-family: var(--font-serif);
-    font-size: clamp(1.35rem, 4.5vw, 1.75rem);
+    font-size: clamp(1.25rem, 4.2vw, 1.75rem);
     font-weight: 500;
     line-height: 1.25;
     letter-spacing: 0.02em;
@@ -208,15 +238,15 @@
 
   .text-eyebrow {
     font-family: var(--font-display);
-    font-size: 0.6875rem;
+    font-size: clamp(0.62rem, 2.4vw, 0.6875rem);
     font-weight: 500;
-    letter-spacing: 0.32em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
   }
 
   .text-body {
     font-family: var(--font-serif);
-    font-size: 0.9375rem;
+    font-size: clamp(0.9rem, 3.6vw, 0.9875rem);
     font-weight: 400;
     line-height: 1.7;
     letter-spacing: 0.02em;
@@ -224,25 +254,65 @@
 
   .text-body-sans {
     font-family: var(--font-sans);
-    font-size: 0.875rem;
+    font-size: clamp(0.8125rem, 3.2vw, 0.875rem);
     font-weight: 300;
     line-height: 1.65;
   }
 
   .text-caption {
     font-family: var(--font-serif);
-    font-size: 0.75rem;
+    font-size: clamp(0.68rem, 2.8vw, 0.75rem);
     font-weight: 400;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
 
   .text-label {
     font-family: var(--font-sans);
-    font-size: 0.6875rem;
+    font-size: clamp(0.625rem, 2.5vw, 0.6875rem);
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+  }
+
+  /* Mobile viewport height — prefer svh/dvh over 100vh */
+  .min-h-screen-mobile {
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+
+  .h-screen-mobile {
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+  }
+
+  .touch-target {
+    min-width: var(--touch-min);
+    min-height: var(--touch-min);
+  }
+
+  .safe-pad-x {
+    padding-left: max(1.25rem, var(--safe-left));
+    padding-right: max(1.25rem, var(--safe-right));
+  }
+
+  .safe-pad-bottom {
+    padding-bottom: max(1.25rem, calc(var(--safe-bottom) + 0.5rem));
+  }
+
+  .safe-inset-bottom {
+    bottom: max(1.25rem, calc(var(--safe-bottom) + 0.75rem));
+  }
+
+  .safe-inset-right {
+    right: max(1.05rem, calc(var(--safe-right) + 0.65rem));
+  }
+
+  .safe-inset-top {
+    top: max(0.75rem, calc(var(--safe-top) + 0.5rem));
   }
 
   /* Surfaces */
@@ -355,6 +425,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .animate-floral-sway,
+  .animate-floral-float,
+  .animate-floral-drift {
+    animation: none !important;
+  }
+}
+
+/* Mobile: kill continuous floral CSS to save battery / jank */
+@media (max-width: 767px) {
   .animate-floral-sway,
   .animate-floral-float,
   .animate-floral-drift {

@@ -38,28 +38,28 @@ function FlipDigit({
   const display = String(value).padStart(pad, "0");
 
   return (
-    <div className="flex min-w-[3.75rem] flex-1 flex-col items-center gap-2.5 sm:min-w-[4.25rem]">
+    <div className="flex min-w-0 flex-1 flex-col items-center gap-1.5 sm:gap-2.5">
       <div
         className={cn(
-          "relative flex h-[2.85rem] w-full items-center justify-center overflow-hidden sm:h-[3.35rem]",
-          "rounded-[2px] border border-brown-500/12 bg-ivory-50/70",
+          "relative flex h-10 w-full max-w-[3.5rem] items-center justify-center overflow-hidden sm:h-[3.35rem] sm:max-w-none",
+          "mx-auto rounded-[2px] border border-brown-500/12 bg-ivory-50/70",
           "shadow-[inset_0_1px_0_rgb(255_255_255/0.5)]",
         )}
       >
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={display}
-            initial={reduced ? false : { opacity: 0, y: 8 }}
+            initial={reduced ? false : { opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduced ? undefined : { opacity: 0, y: -8 }}
+            exit={reduced ? undefined : { opacity: 0, y: -6 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute font-serif text-[clamp(1.85rem,8vw,2.65rem)] font-medium leading-none tracking-wide text-burgundy-500"
+            className="absolute font-serif text-[clamp(1.35rem,6.5vw,2.65rem)] font-medium leading-none tracking-wide text-burgundy-500"
           >
             {display}
           </motion.span>
         </AnimatePresence>
       </div>
-      <span className="font-display text-[0.58rem] font-medium tracking-[0.22em] text-brown-500/70 uppercase sm:text-[0.62rem]">
+      <span className="max-w-full truncate px-0.5 text-center font-display text-[0.5rem] font-medium tracking-[0.14em] text-brown-500/70 uppercase sm:text-[0.62rem] sm:tracking-[0.22em]">
         {label}
       </span>
     </div>
@@ -70,16 +70,40 @@ function Separator() {
   return (
     <span
       aria-hidden
-      className="mt-2 select-none font-serif text-xl text-gold-500/40 sm:mt-3 sm:text-2xl"
+      className="mt-1.5 shrink-0 select-none font-serif text-base text-gold-500/40 sm:mt-3 sm:text-2xl"
     >
       :
     </span>
   );
 }
 
+function TimerSkeleton({ labels }: { labels: CountdownLabels }) {
+  return (
+    <div className="px-0.5 sm:px-1">
+      <GoldDivider variant="ornament" className="mb-5 sm:mb-7" max="lg" />
+      <div
+        className="flex w-full items-start justify-between gap-0.5 sm:gap-2"
+        role="timer"
+        aria-busy="true"
+        aria-label="Geri sayım yükleniyor"
+      >
+        {([labels.days, labels.hours, labels.minutes, labels.seconds] as const).map(
+          (label, i) => (
+            <div key={label} className="contents">
+              {i > 0 ? <Separator /> : null}
+              <FlipDigit value={0} label={label} />
+            </div>
+          ),
+        )}
+      </div>
+      <GoldDivider variant="line" className="mt-5 sm:mt-7" max="sm" />
+    </div>
+  );
+}
+
 /**
  * Reusable real-time wedding countdown.
- * Reads target datetime via props (from content/config).
+ * Renders a stable placeholder until client mount to avoid hydration mismatch.
  */
 export function CountdownTimer({
   targetISO,
@@ -90,22 +114,24 @@ export function CountdownTimer({
 }: Props) {
   const time = useCountdown(targetISO);
 
-  const body = time.isPast ? (
+  const body = !time.ready ? (
+    <TimerSkeleton labels={labels} />
+  ) : time.isPast ? (
     <div className="px-2 py-6 text-center">
       <GoldDivider variant="ornament" className="mb-6" max="md" />
       <Typography
         variant="script"
-        className="text-[clamp(1.75rem,7vw,2.35rem)] text-burgundy-500"
+        className="text-[clamp(1.5rem,6.5vw,2.35rem)] text-burgundy-500"
       >
         {arrivedMessage}
       </Typography>
       <GoldDivider variant="line" className="mt-6" max="sm" />
     </div>
   ) : (
-    <div className="px-1">
-      <GoldDivider variant="ornament" className="mb-7" max="lg" />
+    <div className="px-0.5 sm:px-1">
+      <GoldDivider variant="ornament" className="mb-5 sm:mb-7" max="lg" />
       <div
-        className="flex items-start justify-between gap-1 sm:gap-2"
+        className="flex w-full items-start justify-between gap-0.5 sm:gap-2"
         role="timer"
         aria-live="polite"
         aria-atomic="true"
@@ -122,7 +148,7 @@ export function CountdownTimer({
         <Separator />
         <FlipDigit value={time.seconds} label={labels.seconds} />
       </div>
-      <GoldDivider variant="line" className="mt-7" max="sm" />
+      <GoldDivider variant="line" className="mt-5 sm:mt-7" max="sm" />
     </div>
   );
 
@@ -135,7 +161,7 @@ export function CountdownTimer({
       tone="ivory"
       rotate="none"
       padded="md"
-      className={cn("mx-auto w-full max-w-sm", className)}
+      className={cn("mx-auto w-full max-w-sm overflow-hidden", className)}
     >
       {body}
     </VintageCard>

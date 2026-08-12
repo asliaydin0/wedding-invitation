@@ -30,7 +30,7 @@ export function Input({
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
         className={cn(
-          "w-full border-0 border-b bg-transparent px-0 py-2.5 font-serif text-base text-ink outline-none transition",
+          "min-h-11 w-full border-0 border-b bg-transparent px-0 py-2.5 font-serif text-base text-ink outline-none transition",
           "placeholder:text-ink-muted/50 focus:border-burgundy-500",
           error ? "border-burgundy-500/70" : "border-brown-400/35",
           className,
