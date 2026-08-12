@@ -26,7 +26,7 @@ export function SectionHeading({
   return (
     <header
       className={cn(
-        "mb-10",
+        "relative z-20 mb-10 px-2",
         align === "center" && "text-center",
         className,
       )}

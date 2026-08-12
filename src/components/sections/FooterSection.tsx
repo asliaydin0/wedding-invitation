@@ -14,14 +14,14 @@ export function FooterSection() {
         <FloralAccent preset="finale" />
 
         <Reveal variant="fade" intensity="subtle">
-          <div className="relative z-[1] px-1 py-10 sm:px-2 sm:py-12">
+          <div className="relative z-20 px-4 py-10 sm:px-6 sm:py-12">
             <Typography variant="eyebrow" tone="gold" className="mb-6">
               {wedding.copy.footerEyebrow}
             </Typography>
 
             <Typography
               variant="script"
-              className="mb-2 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400"
+              className="mb-2 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400 drop-shadow-[0_1px_12px_rgb(21_17_14/0.5)]"
             >
               {wedding.couple.partnerOne}
             </Typography>
@@ -30,7 +30,7 @@ export function FooterSection() {
             </Typography>
             <Typography
               variant="script"
-              className="mb-8 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400"
+              className="mb-8 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400 drop-shadow-[0_1px_12px_rgb(21_17_14/0.5)]"
             >
               {wedding.couple.partnerTwo}
             </Typography>

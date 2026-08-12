@@ -59,7 +59,7 @@ export function InvitationSection({
   const inner = (
     <>
       {floral !== "none" ? <FloralAccent preset={floral} /> : null}
-      <div className="relative z-[1]">
+      <div className="relative z-20">
         {heading ? (
           revealHeading ? (
             <Reveal variant="fadeUp" intensity="subtle">

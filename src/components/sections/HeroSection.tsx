@@ -71,7 +71,7 @@ export function HeroSection() {
         initial={reduced ? false : "hidden"}
         animate={show ? "visible" : "hidden"}
       >
-        {show ? <FloralAccent preset="hero" /> : null}
+        {show ? <FloralAccent preset="hero" className="z-0" /> : null}
 
         <div
           aria-hidden
@@ -80,8 +80,8 @@ export function HeroSection() {
 
         <div
           className={cn(
-            "relative z-10 flex flex-1 flex-col items-center justify-center text-center",
-            "px-4 sm:px-8",
+            "relative z-20 flex flex-1 flex-col items-center justify-center text-center",
+            "px-5 sm:px-10",
             "pt-[max(3.5rem,calc(var(--safe-top)+2.5rem))]",
             "pb-[max(5.5rem,calc(var(--safe-bottom)+5rem))]",
           )}
@@ -92,12 +92,13 @@ export function HeroSection() {
             </Typography>
           </motion.div>
 
-          <h1 className="flex w-full max-w-[min(100%,20rem)] flex-col items-center px-1 sm:max-w-md">
+          <h1 className="flex w-full max-w-[min(100%,18.5rem)] flex-col items-center px-2 sm:max-w-md">
             <motion.span
               variants={reduced ? undefined : heroName}
               className={cn(
                 "font-script block w-full max-w-full break-words text-burgundy-400",
                 "text-[clamp(2.35rem,11.5vw,4.5rem)] leading-[1.08] tracking-wide",
+                "drop-shadow-[0_1px_12px_rgb(21_17_14/0.45)]",
               )}
             >
               {wedding.couple.partnerOne}
@@ -105,7 +106,7 @@ export function HeroSection() {
 
             <motion.span
               variants={reduced ? undefined : heroAmpersand}
-              className="my-0.5 font-serif text-sm tracking-[0.35em] text-gold-400/80 sm:my-2 sm:text-base"
+              className="my-1.5 font-serif text-sm tracking-[0.35em] text-gold-400/85 sm:my-2.5 sm:text-base"
             >
               &
             </motion.span>
@@ -115,6 +116,7 @@ export function HeroSection() {
               className={cn(
                 "font-script block w-full max-w-full break-words text-burgundy-400",
                 "text-[clamp(2.35rem,11.5vw,4.5rem)] leading-[1.08] tracking-wide",
+                "drop-shadow-[0_1px_12px_rgb(21_17_14/0.45)]",
               )}
             >
               {wedding.couple.partnerTwo}
