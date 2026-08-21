@@ -28,6 +28,8 @@ export function buildWeddingData(config: WeddingConfig = weddingConfig): Wedding
     meta: config.meta,
     opening: {
       sealHint: config.copy.sealHint,
+      brideName: config.brideName,
+      groomName: config.groomName,
     },
     hero: {
       eyebrow: config.copy.heroEyebrow,

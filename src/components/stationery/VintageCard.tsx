@@ -59,7 +59,7 @@ export function VintageCard({
         "rounded-[3px] text-ink",
         "border border-brown-500/15",
         elevated &&
-          "shadow-[0_14px_40px_rgb(21_17_14/0.18),0_2px_6px_rgb(21_17_14/0.08),inset_0_1px_0_rgb(255_255_255/0.45)]",
+          "shadow-[0_18px_48px_rgb(21_17_14/0.22),0_4px_12px_rgb(21_17_14/0.1),inset_0_1px_0_rgb(255_255_255/0.55),inset_0_0_0_1px_rgb(176_143_82/0.08)]",
         rotateClass[rotate],
         className,
       )}

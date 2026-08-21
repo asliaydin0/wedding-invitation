@@ -46,22 +46,22 @@ export function HeroSection({ data }: Props) {
         <div className="absolute inset-0 bg-atmosphere" />
         <div
           aria-hidden
-          className="absolute inset-0 opacity-90"
+          className="absolute inset-0 opacity-95"
           style={{
             backgroundImage: `
-              radial-gradient(ellipse at 50% 28%, rgb(110 90 70 / 0.38), transparent 55%),
-              radial-gradient(ellipse at 20% 80%, rgb(122 31 51 / 0.12), transparent 45%),
-              radial-gradient(ellipse at 80% 15%, rgb(196 167 106 / 0.1), transparent 40%),
-              linear-gradient(180deg, rgb(44 36 28 / 0.2), transparent 35%, rgb(21 17 14 / 0.55) 100%)
+              radial-gradient(ellipse at 50% 26%, rgb(110 90 70 / 0.42), transparent 56%),
+              radial-gradient(ellipse at 18% 78%, rgb(122 31 51 / 0.14), transparent 46%),
+              radial-gradient(ellipse at 82% 14%, rgb(196 167 106 / 0.14), transparent 40%),
+              linear-gradient(180deg, rgb(44 36 28 / 0.18), transparent 38%, rgb(21 17 14 / 0.58) 100%)
             `,
           }}
         />
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 h-[55%] opacity-40"
+          className="absolute inset-x-0 top-0 h-[58%] opacity-45"
           style={{
             background:
-              "linear-gradient(180deg, rgb(250 247 242 / 0.08), transparent)",
+              "linear-gradient(180deg, rgb(250 247 242 / 0.1), transparent)",
           }}
         />
         <GrainOverlay />

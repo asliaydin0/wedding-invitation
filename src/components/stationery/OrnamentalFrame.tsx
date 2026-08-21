@@ -94,7 +94,7 @@ export function OrnamentalFrame({
           aria-hidden
           className={cn(
             "pointer-events-none absolute inset-[5px] rounded-[1px] border sm:inset-1.5",
-            tone === "antique" && "border-gold-500/18",
+            tone === "antique" && "border-gold-500/22",
             tone === "bronze" && "border-beige-400/25",
             tone === "ink" && "border-brown-500/15",
           )}

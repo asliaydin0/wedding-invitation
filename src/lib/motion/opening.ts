@@ -60,28 +60,32 @@ export const sealVariants: Variants = {
     scale: 1,
     y: 0,
     opacity: 1,
-    filter: "drop-shadow(0 0 0px rgba(192, 140, 70, 0))",
+    filter: "drop-shadow(0 8px 18px rgba(66, 17, 28, 0.35))",
   },
   idle: {
     scale: [1, scale.sealPulse, 1],
-    y: 0,
+    y: [0, -1.5, 0],
     opacity: 1,
-    filter: "drop-shadow(0 0 0px rgba(192, 140, 70, 0))",
+    filter: [
+      "drop-shadow(0 8px 18px rgba(66, 17, 28, 0.35))",
+      "drop-shadow(0 10px 22px rgba(66, 17, 28, 0.42))",
+      "drop-shadow(0 8px 18px rgba(66, 17, 28, 0.35))",
+    ],
     transition: {
-      duration: 3.2,
+      duration: 3.6,
       repeat: Infinity,
       ease: "easeInOut",
     },
   },
   opening: {
-    scale: [1, 0.97, 1.04, 0.5],
-    y: [0, 1, -4, -28],
-    opacity: [1, 1, 0.95, 0],
+    scale: [1, 0.97, 1.05, 0.48],
+    y: [0, 1, -6, -32],
+    opacity: [1, 1, 0.92, 0],
     filter: [
-      "drop-shadow(0 0 0px rgba(192, 140, 70, 0))",
-      "drop-shadow(0 0 10px rgba(196, 167, 106, 0.4))",
-      "drop-shadow(0 0 22px rgba(196, 167, 106, 0.55))",
-      "drop-shadow(0 0 6px rgba(196, 167, 106, 0))",
+      "drop-shadow(0 8px 18px rgba(66, 17, 28, 0.35))",
+      "drop-shadow(0 0 12px rgba(196, 167, 106, 0.45))",
+      "drop-shadow(0 0 26px rgba(196, 167, 106, 0.6))",
+      "drop-shadow(0 0 8px rgba(196, 167, 106, 0))",
     ],
     transition: {
       duration: duration.seal,
@@ -92,19 +96,23 @@ export const sealVariants: Variants = {
 };
 
 export const warmGlowVariants: Variants = {
-  sealed: { opacity: 0, scale: 0.7 },
+  sealed: {
+    opacity: 0.35,
+    scale: 1,
+    transition: { duration: 1.4, ease: ease.cinematic },
+  },
   opening: {
-    opacity: [0, 0.75, 0.4],
-    scale: [0.7, 1.1, 1.35],
+    opacity: [0.35, 0.85, 0.45],
+    scale: [1, 1.12, 1.32],
     transition: {
       duration: duration.glow,
-      delay: 0.22,
+      delay: 0.18,
       ease: ease.cinematic,
     },
   },
   open: {
-    opacity: 0.2,
-    scale: 1.4,
+    opacity: 0.18,
+    scale: 1.38,
     transition: { duration: 0.9 },
   },
 };

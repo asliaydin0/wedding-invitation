@@ -142,7 +142,11 @@ export type WeddingConfig = {
 /** Section-shaped data consumed by components */
 export type WeddingData = {
   meta: WeddingConfig["meta"];
-  opening: { sealHint: string };
+  opening: {
+    sealHint: string;
+    brideName: string;
+    groomName: string;
+  };
   hero: {
     eyebrow: string;
     brideName: string;
