@@ -24,7 +24,7 @@ type Props = {
 };
 
 /**
- * Full-viewport hero — content comes only from `data` (config).
+ * Full-viewport hero — locked to visual viewport; high-contrast copy on dark.
  */
 export function HeroSection({ data }: Props) {
   const { isOpen } = useInvitation();
@@ -35,7 +35,7 @@ export function HeroSection({ data }: Props) {
     <section
       id="hero"
       aria-label="Karşılama"
-      className="relative flex min-h-screen-mobile flex-col overflow-x-clip overflow-y-hidden"
+      className="relative flex h-hero flex-col overflow-x-clip"
     >
       <motion.div
         className="absolute inset-0 will-change-[opacity]"
@@ -69,7 +69,7 @@ export function HeroSection({ data }: Props) {
       </motion.div>
 
       <motion.div
-        className="relative z-10 flex min-h-screen-mobile flex-1 flex-col will-change-[opacity,transform]"
+        className="relative z-10 flex h-full min-h-0 flex-1 flex-col will-change-[opacity,transform]"
         variants={reduced ? undefined : heroRoot}
         initial={reduced ? false : "hidden"}
         animate={show ? "visible" : "hidden"}
@@ -78,7 +78,7 @@ export function HeroSection({ data }: Props) {
 
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[42%] z-0 size-[min(78vw,20rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(250,247,242,0.14)_0%,transparent_70%)] blur-2xl sm:size-[min(88vw,22rem)]"
+          className="pointer-events-none absolute left-1/2 top-[42%] z-0 size-[min(78vw,20rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(250,247,242,0.2)_0%,rgba(196,167,106,0.08)_42%,transparent_70%)] blur-2xl sm:size-[min(88vw,22rem)]"
         />
 
         <div
@@ -86,7 +86,7 @@ export function HeroSection({ data }: Props) {
             "relative z-20 flex flex-1 flex-col items-center justify-center text-center",
             "px-5 sm:px-10",
             "pt-[max(3.5rem,calc(var(--safe-top)+2.5rem))]",
-            "pb-[max(5.5rem,calc(var(--safe-bottom)+5rem))]",
+            "pb-[max(5.75rem,calc(var(--safe-bottom)+5.25rem))]",
           )}
         >
           <motion.div variants={reduced ? undefined : heroMeta}>
@@ -99,9 +99,8 @@ export function HeroSection({ data }: Props) {
             <motion.span
               variants={reduced ? undefined : heroName}
               className={cn(
-                "font-script block w-full max-w-full break-words text-burgundy-400",
-                "text-[clamp(2.35rem,11.5vw,4.5rem)] leading-[1.08] tracking-wide",
-                "drop-shadow-[0_1px_12px_rgb(21_17_14/0.45)]",
+                "font-script text-script-on-dark block w-full max-w-full break-words",
+                "text-[clamp(2.5rem,12vw,4.5rem)] leading-[1.08] tracking-wide",
               )}
             >
               {data.brideName}
@@ -109,7 +108,7 @@ export function HeroSection({ data }: Props) {
 
             <motion.span
               variants={reduced ? undefined : heroAmpersand}
-              className="my-1.5 font-serif text-sm tracking-[0.35em] text-gold-400/85 sm:my-2.5 sm:text-base"
+              className="my-1.5 font-serif text-sm tracking-[0.35em] text-gold-500/80 sm:my-2.5 sm:text-base"
             >
               &
             </motion.span>
@@ -117,9 +116,8 @@ export function HeroSection({ data }: Props) {
             <motion.span
               variants={reduced ? undefined : heroName}
               className={cn(
-                "font-script block w-full max-w-full break-words text-burgundy-400",
-                "text-[clamp(2.35rem,11.5vw,4.5rem)] leading-[1.08] tracking-wide",
-                "drop-shadow-[0_1px_12px_rgb(21_17_14/0.45)]",
+                "font-script text-script-on-dark block w-full max-w-full break-words",
+                "text-[clamp(2.5rem,12vw,4.5rem)] leading-[1.08] tracking-wide",
               )}
             >
               {data.groomName}
@@ -131,18 +129,14 @@ export function HeroSection({ data }: Props) {
             className="mt-7 flex w-full max-w-xs flex-col items-center sm:mt-10"
           >
             <Divider className="mb-5 sm:mb-6" />
-            <Typography
-              variant="caption"
-              tone="onDarkMuted"
-              className="px-2 text-ivory-100/70"
-            >
+            <Typography variant="caption" tone="gold" className="px-2 text-gold-400/75">
               {data.dateLabel}
             </Typography>
           </motion.div>
 
           <motion.p
             variants={reduced ? undefined : heroMeta}
-            className="mt-6 max-w-[16.5rem] px-1 font-serif text-[0.9rem] leading-relaxed text-ivory-100/65 italic sm:mt-8 sm:max-w-sm sm:text-base"
+            className="mt-6 max-w-[16.5rem] px-1 font-serif text-[0.95rem] leading-relaxed text-beige-300/70 italic sm:mt-8 sm:max-w-sm sm:text-base"
           >
             “{data.body}”
           </motion.p>
@@ -150,7 +144,7 @@ export function HeroSection({ data }: Props) {
 
         <motion.div
           variants={reduced ? undefined : heroScrollHint}
-          className="absolute inset-x-0 z-20 flex justify-center safe-inset-bottom sm:bottom-9"
+          className="absolute inset-x-0 z-20 flex justify-center"
           style={{
             bottom: "max(1.5rem, calc(var(--safe-bottom) + 1.25rem))",
           }}

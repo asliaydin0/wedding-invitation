@@ -44,14 +44,17 @@
   --ink: var(--espresso-900);
   --ink-soft: var(--brown-600);
   --ink-muted: var(--brown-400);
-  --ink-on-dark: var(--ivory-100);
-  --ink-on-dark-muted: color-mix(in srgb, var(--ivory-200) 72%, transparent);
+  /* Soft champagne — warm, muted, not white */
+  --ink-on-dark: #d6c8b4;
+  --ink-on-dark-muted: color-mix(in srgb, var(--beige-300) 58%, transparent);
 
   --accent: var(--burgundy-500);
   --accent-hover: var(--burgundy-400);
   --accent-deep: var(--burgundy-600);
   --accent-gold: var(--gold-400);
-  --accent-gold-soft: var(--gold-300);
+  --accent-gold-soft: var(--gold-500);
+  /* True burgundy script on dark atmosphere */
+  --script-on-dark: var(--burgundy-400);
 
   --border-subtle: color-mix(in srgb, var(--gold-500) 28%, transparent);
   --border-paper: color-mix(in srgb, var(--brown-500) 18%, transparent);
@@ -122,6 +125,7 @@
   --color-ink-muted: var(--ink-muted);
   --color-ink-on-dark: var(--ink-on-dark);
   --color-ink-on-dark-muted: var(--ink-on-dark-muted);
+  --color-script-on-dark: var(--script-on-dark);
 
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
@@ -170,10 +174,10 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
     overscroll-behavior-x: none;
-    /* Fill mobile browser chrome correctly */
+    /* Fill mobile browser chrome correctly — fill-available before svh/dvh */
     min-height: 100vh;
-    min-height: 100svh;
     min-height: -webkit-fill-available;
+    min-height: 100svh;
     min-height: 100dvh;
   }
 
@@ -276,19 +280,36 @@
     text-transform: uppercase;
   }
 
-  /* Mobile viewport height — prefer svh/dvh over 100vh */
+  /* Mobile viewport height — svh/dvh must win over -webkit-fill-available */
   .min-h-screen-mobile {
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     min-height: 100svh;
     min-height: 100dvh;
-    min-height: -webkit-fill-available;
   }
 
   .h-screen-mobile {
     height: 100vh;
-    height: 100svh;
     height: -webkit-fill-available;
+    height: 100svh;
     height: 100dvh;
+  }
+
+  /* Hero / full-bleed first screen — at least one visual viewport tall */
+  .h-hero {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
+  .text-script-on-dark {
+    color: var(--script-on-dark);
+    /* Soft gold + burgundy glow so bordo stays bordo but reads on espresso */
+    text-shadow:
+      0 0 28px rgb(196 167 106 / 0.22),
+      0 0 48px rgb(122 31 51 / 0.4),
+      0 2px 10px rgb(21 17 14 / 0.55);
   }
 
   .touch-target {

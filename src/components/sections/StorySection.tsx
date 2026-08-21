@@ -74,7 +74,7 @@ export function StorySection({ data }: Props) {
           ))}
           <Typography
             variant="script"
-            className="pt-2 text-[clamp(1.75rem,8vw,2.25rem)] text-burgundy-400 sm:text-4xl"
+            className="text-script-on-dark pt-2 text-[clamp(1.75rem,8vw,2.25rem)] sm:text-4xl"
           >
             {data.brideName} & {data.groomName}
           </Typography>

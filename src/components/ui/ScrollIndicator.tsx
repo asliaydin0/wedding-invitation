@@ -23,7 +23,7 @@ export function ScrollIndicator({
       href={href}
       aria-label={label}
       className={cn(
-        "group inline-flex min-h-11 min-w-11 flex-col items-center justify-center gap-1.5 px-3 text-ivory-100/50 transition hover:text-ivory-100/75",
+        "group inline-flex min-h-11 min-w-11 flex-col items-center justify-center gap-1.5 px-3 text-gold-500/65 transition hover:text-gold-400",
         className,
       )}
     >
@@ -42,7 +42,7 @@ export function ScrollIndicator({
                 ease: "easeInOut",
               }
         }
-        className="flex size-9 items-center justify-center rounded-full border border-ivory-100/20 sm:size-8"
+        className="flex size-9 items-center justify-center rounded-full border border-gold-500/30 sm:size-8"
       >
         <ChevronDown size={14} strokeWidth={1.25} />
       </motion.span>

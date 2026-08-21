@@ -25,7 +25,7 @@ export function FooterSection({ data }: Props) {
 
             <Typography
               variant="script"
-              className="mb-2 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400 drop-shadow-[0_1px_12px_rgb(21_17_14/0.5)]"
+              className="text-script-on-dark mb-2 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)]"
             >
               {data.brideName}
             </Typography>
@@ -34,7 +34,7 @@ export function FooterSection({ data }: Props) {
             </Typography>
             <Typography
               variant="script"
-              className="mb-8 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)] text-burgundy-400 drop-shadow-[0_1px_12px_rgb(21_17_14/0.5)]"
+              className="text-script-on-dark mb-8 max-w-full break-words text-[clamp(2.1rem,11vw,3.5rem)]"
             >
               {data.groomName}
             </Typography>
